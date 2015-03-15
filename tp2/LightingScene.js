@@ -20,7 +20,7 @@ LightingScene.prototype.init = function(application) {
 
 	this.initLights();
 
-	this.gl.clearColor(1.0, 1.0, 1.0, 1.0);
+    this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 	this.gl.clearDepth(100.0);
 	this.gl.enable(this.gl.DEPTH_TEST);
 	this.gl.enable(this.gl.CULL_FACE);
@@ -31,7 +31,7 @@ LightingScene.prototype.init = function(application) {
 	// Scene elements
 	this.table = new MyTable(this);
 	this.chair = new MyChair(this);
-	this.wall = new Plane(this);
+	this.wall = new Plane(this, 10);
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS);
 	this.boardB = new Plane(this, BOARD_B_DIVISIONS);
 
@@ -42,11 +42,11 @@ LightingScene.prototype.init = function(application) {
 	this.materialA.setAmbient(0.3,0.3,0.3,1);
 	this.materialA.setDiffuse(0.6,0.6,0.6,1);
 	this.materialA.setSpecular(0.2,0.2,0.2,1);
-	this.materialA.setShininess(120);
+	this.materialA.setShininess(10);
 
 	this.materialB = new CGFappearance(this);
-	this.materialB.setAmbient(1.0, 1.0, 1.0, 1);
-	this.materialB.setDiffuse(1.0, 1.0, 1.0, 1);
+	this.materialB.setAmbient(1.0, 1.0, 1.0, 0.1);
+	this.materialB.setDiffuse(1.0, 1.0, 1.0, 0.1);
 	this.materialB.setSpecular(1.0, 1.0, 1.0, 1);	
 	this.materialB.setShininess(120);
 	
@@ -69,39 +69,46 @@ LightingScene.prototype.initCameras = function() {
 };
 
 LightingScene.prototype.initLights = function() {
-	this.setGlobalAmbientLight(0.0, 0.0, 0.0, 1.0);
+	this.setGlobalAmbientLight(0.2, 0.2, 0.2, 1.0);
 
 	this.shader.bind();
 	
 	// Positions for four lights
-	this.lights[0].setPosition(4.0, 6.0, 1.0, 1.0);
-	this.lights[1].setPosition(10.5, 6.0, 1.0, 1.0);
-	this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
-	this.lights[3].setPosition(4.0, 6.0, 5.0, 1.0);
+	this.lights[0].setPosition(4.5, 6.0, 4.0, 1.0);
+	this.lights[1].setPosition(12, 6.0, 4.0, 1.0);
+	this.lights[2].setPosition(12, 6.0, 9.0, 1.0);
+	this.lights[3].setPosition(4.5, 6.0, 9.0, 1.0);
 
-	this.lights[0].setAmbient(0, 0, 0, 1);
-	this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-	this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
-	this.lights[0].enable();
+	this.lights[0].setAmbient(0.0, 0.0, 0.0, 1.0);
+	this.lights[0].setDiffuse(1.0, 1.0, 1.0, 0.5);
+	this.lights[0].setSpecular(1.0, 1.0, 1.0, 0.5);
+	this.lights[0].setConstantAttenuation(0.0);
+	this.lights[0].setLinearAttenuation(0.8);
+	this.lights[0].setQuadraticAttenuation(0.0);
+	this.lights[0].enable()
 
-	this.lights[1].setAmbient(0, 0, 0, 1);
-	this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+	this.lights[1].setAmbient(0.0, 0.0, 0.0, 1.0);
+	this.lights[1].setDiffuse(1.0, 1.0, 1.0, 0.5);
+	this.lights[1].setSpecular(1.0, 1.0, 1.0, 0.5);
+	this.lights[1].setConstantAttenuation(0.0);
+	this.lights[1].setLinearAttenuation(0.8);
+	this.lights[1].setQuadraticAttenuation(0.0);
 	this.lights[1].enable();
 
-	this.lights[2].setAmbient(0, 0, 0, 1);
-	this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
-	this.lights[2].setSpecular(1.0, 1.0, 1.0, 1.0);
-	this.lights[2].setConstantAttenuation(1.0);
-	this.lights[2].setLinearAttenuation(1.0);
-	this.lights[2].setQuadraticAttenuation(1.0);
+	this.lights[2].setAmbient(0.0, 0.0, 0.0, 1.0);
+	this.lights[2].setDiffuse(1.0, 1.0, 1.0, 0.5);
+	this.lights[2].setSpecular(1.0, 1.0, 1.0, 0.5);
+	this.lights[2].setConstantAttenuation(0.0);
+	this.lights[2].setLinearAttenuation(0.8);
+	this.lights[2].setQuadraticAttenuation(0.0);
 	this.lights[2].enable();
 
-	this.lights[3].setAmbient(0, 0, 0, 1);
-	this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
-	this.lights[3].setSpecular(1.0, 1.0, 1.0, 1.0);
-	this.lights[3].setConstantAttenuation(1.0);
-	this.lights[3].setLinearAttenuation(1.0);
-	this.lights[3].setQuadraticAttenuation(1.0);
+	this.lights[3].setAmbient(0.0, 0.0, 0.0, 1.0);
+	this.lights[3].setDiffuse(1.0, 1.0, 1.0, 0.5);
+	this.lights[3].setSpecular(1.0, 1.0, 1.0, 0.5);
+	this.lights[3].setConstantAttenuation(0.0);
+	this.lights[3].setLinearAttenuation(0.8);
+	this.lights[3].setQuadraticAttenuation(0.0);
 	this.lights[3].enable();
 
 	this.shader.unbind();
