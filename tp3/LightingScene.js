@@ -29,7 +29,7 @@ LightingScene.prototype.init = function(application) {
 	this.axis = new CGFaxis(this);
 
 	// Scene elements
-	this.lamp = new MyLamp(this, 8, 20);
+	this.lamp = new MyLamp(this, 8, 4);
 	this.cylinder = new MyCylinder(this, 8, 20);
 	this.prism = new MyPrism(this, 8, 20);
 	this.table = new MyTable(this);
@@ -113,6 +113,11 @@ LightingScene.prototype.initLights = function() {
 	this.lights[3].setLinearAttenuation(0.8);
 	this.lights[3].setQuadraticAttenuation(0.0);
 	this.lights[3].enable();
+
+	this.lights[0].setVisible(true);
+	this.lights[1].setVisible(true);
+	this.lights[2].setVisible(true);
+	this.lights[3].setVisible(true);
 
 	this.shader.unbind();
 };
@@ -199,7 +204,6 @@ LightingScene.prototype.display = function() {
 	this.pushMatrix();
 		this.translate(4, 4.5, 0.2);
 		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
-		
 		this.materialA.apply();
 		this.boardA.display();
 	this.popMatrix();
@@ -208,7 +212,6 @@ LightingScene.prototype.display = function() {
 	this.pushMatrix();
 		this.translate(10.5, 4.5, 0.2);
 		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
-		
 		this.materialB.apply();
 		this.boardB.display();
 	this.popMatrix();
@@ -245,7 +248,6 @@ LightingScene.prototype.display = function() {
 
 	// Chairs to 2nd table
 
-
 	this.pushMatrix();
 		this.translate(13, 0, 6.5);
 		this.chair.display();
@@ -273,29 +275,47 @@ LightingScene.prototype.display = function() {
 	this.popMatrix();
 
 
-// prisma
+	// prisma
+	this.pushMatrix();
+		this.translate(14, 0, 14);
+		this.scale(0.5, 8, 0.5)
+		this.rotate(-90 * degToRad, 1, 0, 0);
+		this.materialF.apply();
+		this.prism.display();
+	this.popMatrix();
+
+	// cilindro
 	this.pushMatrix();
 		this.translate(1, 0, 14);
 		this.scale(0.5, 8, 0.5)
 		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.prism.display();
-	this.popMatrix();
-
-
-// cilindro
-	this.pushMatrix();
-		this.translate(1, 0, 5);
-		this.scale(0.5, 8, 0.5)
-		this.rotate(-90 * degToRad, 1, 0, 0);
+		this.materialF.apply();
 		this.cylinder.display();
 	this.popMatrix();
 
-// candeeiro
+	//candeeiros
 	this.pushMatrix();
-		this.translate(7, 6, 7);
-		this.scale(0.5, 1.2, 0.5)
-		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.cylinder.display();
+		this.translate(4.5, 6.0, 4.0);
+		this.materialF.apply();
+		this.lamp.display();
+	this.popMatrix();
+	
+	this.pushMatrix();
+		this.translate(12, 6.0, 4.0);
+		this.materialF.apply();
+		this.lamp.display();
+	this.popMatrix();
+
+	this.pushMatrix();
+		this.translate(12, 6.0, 9.0);
+		this.materialF.apply();
+		this.lamp.display();
+	this.popMatrix();
+
+	this.pushMatrix();
+		this.translate(4.5, 6.0, 9.0);
+		this.materialF.apply();
+		this.lamp.display();
 	this.popMatrix();
 
 	// ---- END Primitive drawing section

@@ -33,42 +33,42 @@ MyChair.prototype.display = function(){
 	this.scene.materialL.setShininess(256);
    
    	this.scene.pushMatrix();			//assento
-		this.scene.translate(-2, 2.4, 4);
+		this.scene.translate(-2, 2.1, 4);
 		this.scene.scale(1.5, 0.2, 1.5);
 		this.scene.materialT.apply();
 		this.cubeQuad.display();
 	this.scene.popMatrix();
    
     this.scene.pushMatrix();
-		this.scene.translate(-2, 3.3, 4.8);		//costas
+		this.scene.translate(-2, 3, 4.8);		//costas
 		this.scene.scale(1.5, 2, 0.2);
 		this.scene.materialT.apply();
 		this.cubeQuad.display();
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
-		this.scene.translate(-1.4, 1.2, 4.7);		//perna
-		this.scene.scale(0.2, 2.3, 0.2);
+		this.scene.translate(-1.4, 1, 4.7);		//perna
+		this.scene.scale(0.2, 2, 0.2);
 		this.scene.materialL.apply();
 		this.cubeQuad.display();
     this.scene.popMatrix();  
 
 	this.scene.pushMatrix();
-		this.scene.translate(-1.4, 1.2, 3.4);		//perna
-		this.scene.scale(0.2, 2.3, 0.2);
+		this.scene.translate(-1.4, 1, 3.4);		//perna
+		this.scene.scale(0.2, 2, 0.2);
 		this.scene.materialL.apply();
 		this.cubeQuad.display();
     this.scene.popMatrix();  
 
     this.scene.pushMatrix();
-		this.scene.translate(-2.6, 1.2, 4.7);		//perna
-		this.scene.scale(0.2, 2.3, 0.2);
+		this.scene.translate(-2.6, 1, 4.7);		//perna
+		this.scene.scale(0.2, 2, 0.2);
 		this.cubeQuad.display();
     this.scene.popMatrix();  
 
     this.scene.pushMatrix();
-		this.scene.translate(-2.6, 1.2, 3.4);		//perna
-		this.scene.scale(0.2, 2.3, 0.2);
+		this.scene.translate(-2.6, 1, 3.4);		//perna
+		this.scene.scale(0.2, 2, 0.2);
 		this.cubeQuad.display();
     this.scene.popMatrix();  
 
