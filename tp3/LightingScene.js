@@ -29,6 +29,8 @@ LightingScene.prototype.init = function(application) {
 	this.axis = new CGFaxis(this);
 
 	// Scene elements
+	this.lamp = new MyLamp(this, 8, 20);
+	this.cylinder = new MyCylinder(this, 8, 20);
 	this.prism = new MyPrism(this, 8, 20);
 	this.table = new MyTable(this);
 	this.chair = new MyChair(this);
@@ -277,6 +279,23 @@ LightingScene.prototype.display = function() {
 		this.scale(0.5, 8, 0.5)
 		this.rotate(-90 * degToRad, 1, 0, 0);
 		this.prism.display();
+	this.popMatrix();
+
+
+// cilindro
+	this.pushMatrix();
+		this.translate(1, 0, 5);
+		this.scale(0.5, 8, 0.5)
+		this.rotate(-90 * degToRad, 1, 0, 0);
+		this.cylinder.display();
+	this.popMatrix();
+
+// candeeiro
+	this.pushMatrix();
+		this.translate(7, 6, 7);
+		this.scale(0.5, 1.2, 0.5)
+		this.rotate(-90 * degToRad, 1, 0, 0);
+		this.cylinder.display();
 	this.popMatrix();
 
 	// ---- END Primitive drawing section
