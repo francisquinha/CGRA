@@ -318,6 +318,42 @@ LightingScene.prototype.display = function() {
 		this.lamp.display();
 	this.popMatrix();
 
+
+// suportes candeeiro
+
+	this.pushMatrix();
+		this.translate(4.5, 6.9, 4);
+		this.scale(0.1, 1.1, 0.1)
+		this.rotate(-90 * degToRad, 1, 0, 0);
+		this.materialF.apply();
+		this.cylinder.display();
+	this.popMatrix();
+
+	this.pushMatrix();
+		this.translate(4.5, 6.9, 9);
+		this.scale(0.1, 1.1, 0.1)
+		this.rotate(-90 * degToRad, 1, 0, 0);
+		this.materialF.apply();
+		this.cylinder.display();
+	this.popMatrix();
+
+	this.pushMatrix();
+		this.translate(12, 6.9, 4);
+		this.scale(0.1, 1.1, 0.1)
+		this.rotate(-90 * degToRad, 1, 0, 0);
+		this.materialF.apply();
+		this.cylinder.display();
+	this.popMatrix();
+
+	this.pushMatrix();
+		this.translate(12, 6.9, 9);
+		this.scale(0.1, 1.1, 0.1)
+		this.rotate(-90 * degToRad, 1, 0, 0);
+		this.materialF.apply();
+		this.cylinder.display();
+	this.popMatrix();
+
+	
 	// ---- END Primitive drawing section
 
 	this.shader.unbind();

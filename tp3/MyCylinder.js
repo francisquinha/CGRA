@@ -7,7 +7,6 @@
 	
 	this.slices=slices;
 	this.stacks=stacks;
-
  	this.initBuffers();
  };
 
