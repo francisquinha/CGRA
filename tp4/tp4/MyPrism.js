@@ -85,9 +85,7 @@
 				this.normals.push(zn);
 			}			
 		}
-
 		ind_j += aux_j;
-
 	}
 
  	this.primitiveType = this.scene.gl.TRIANGLES;

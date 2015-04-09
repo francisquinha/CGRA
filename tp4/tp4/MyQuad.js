@@ -5,11 +5,18 @@
  */
 
 //MyQuad e uma subclasse de CGFobject
-function MyQuad(scene) {
+function MyQuad(scene,minS,maxS, minT, maxT) {
 	CGFobject.call(this,scene);
+	
+
+	this.minS = minS;
+	this.maxS = maxS;
+	this.minT = minT;
+	this.maxT = maxT;
 
 	this.initBuffers();
 };
+
 
 MyQuad.prototype = Object.create(CGFobject.prototype);
 MyQuad.prototype.constructor=MyQuad;
@@ -37,10 +44,10 @@ MyQuad.prototype.initBuffers = function () {
 
     this.texCoords = [
     
-		0.0, 1.0,
-		1.0, 1.0,
-		0.0, 0.0,
-		1.0, 0.0
+		this.minS, this.maxT,
+		this.maxS, this.maxT,
+		this.minS, this.minT,
+		this.maxS, this.minT
 		];
 
 	this.initGLBuffers();
