@@ -2,13 +2,25 @@
  * MyCylinder
  * @constructor
  */
- function MyCylinder(scene, slices, stacks) {
+ function MyCylinder(scene, slices, stacks, minS,maxS, minT, maxT) {
  	CGFobject.call(this,scene);
 	
+	this.minS = minS || 0;
+	this.maxS = maxS || 1;
+	this.minT = minT || 0;
+	this.maxT = maxT || 1;
+
 	this.slices=slices;
 	this.stacks=stacks;
  	this.initBuffers();
- };
+
+ 	this.cylinderAppearence = new CGFappearance(this.scene);
+	this.cylinderAppearence.setAmbient(1, 1, 1, 0.5);
+	this.cylinderAppearence.setDiffuse(1, 1, 1, 0.2);
+	this.cylinderAppearence.setSpecular(1, 1, 1, 0.1);
+	this.cylinderAppearence.setShininess(1);
+	this.cylinderAppearence.loadTexture('../resources/images/cylinder.png');
+};
 
  MyCylinder.prototype = Object.create(CGFobject.prototype);
  MyCylinder.prototype.constructor = MyCylinder;
@@ -22,6 +34,7 @@
 	this.vertices = [];
 	this.indices = [];
 	this.normals = [];
+	this.texCoords = [];
 
 	var ind_j = 0;
 	var aux_j = 4 * this.slices;
@@ -91,12 +104,16 @@
 			this.normals.push(y1);
 			this.normals.push(0);
 
+			// coordenadas textura
+			this.texCoords.push(i*this.slices / this.stacks + this.minS, j*this.slices / this.stacks + this.minT);
 		}			
 
 		ind_j += aux_j;
 
 	}
 
+	
+		
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();
 

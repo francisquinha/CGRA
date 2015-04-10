@@ -209,7 +209,6 @@ LightingScene.prototype.display = function() {
 		this.translate(7.5, 0, 7.5);
 		this.rotate(-90 * degToRad, 1, 0, 0);
 		this.scale(15, 15, 0.2);
-
 		this.floorAppearance.apply();
 		this.floor.display();
 	this.popMatrix();
@@ -333,6 +332,7 @@ LightingScene.prototype.display = function() {
 		this.scale(0.5, 8, 0.5)
 		this.rotate(-90 * degToRad, 1, 0, 0);
 		this.materialF.apply();
+		//this.cylinderAppearence.apply();
 		this.cylinder.display();
 	this.popMatrix();
 

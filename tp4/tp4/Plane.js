@@ -46,8 +46,10 @@ Plane.prototype.initBuffers = function() {
 	this.texCoords = [];
 
 	var yCoord = 0.5;
+
 	var deltaS = this.maxS - this.minS;
 	var deltaT = this.maxT - this.minT;
+
 	for (var j = 0; j <= this.nrDivs; j++) 
 	{
 		var xCoord = -0.5;
