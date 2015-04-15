@@ -1,8 +1,8 @@
 /**
- * MyLamp
+ * MyBall
  * @constructor
  */
- function MyLamp(scene, slices, stacks) {
+ function MyBall(scene, slices, stacks) {
  	CGFobject.call(this,scene);
 	
 	this.slices=slices;
@@ -11,19 +11,20 @@
  	this.initBuffers();
  };
 
- MyLamp.prototype = Object.create(CGFobject.prototype);
- MyLamp.prototype.constructor = MyLamp;
+ MyBall.prototype = Object.create(CGFobject.prototype);
+ MyBall.prototype.constructor = MyBall;
 
- MyLamp.prototype.initBuffers = function() {
+ MyBall.prototype.initBuffers = function() {
 
 	var degToRad = Math.PI / 180.0;
 
 	var ang_0 = 360 * degToRad / this.slices;
-	var ang_1 = 90 * degToRad / this.stacks;
+	var ang_1 = 180 * degToRad / this.stacks;
 
 	this.vertices = [];
 	this.indices = [];
 	this.normals = [];
+	this.texCoords = [];
 
 	var ang_1_now = 0;
 	var ang_1_then = ang_1;
@@ -102,6 +103,12 @@
             this.normals.push(x3);
 			this.normals.push(y3);
 			this.normals.push(z3);
+
+			// coordenadas textura
+			this.texCoords.push(i / this.slices, j / this.stacks);
+			this.texCoords.push((i + 1) / this.slices, j / this.stacks);
+			this.texCoords.push(i / this.slices, (j + 1) / this.stacks);
+			this.texCoords.push((i + 1) / this.slices, (j + 1) / this.stacks);
 
 		}			
 

@@ -1,40 +1,29 @@
 /**
- * MyCylinder
+ * MyPrism
  * @constructor
  */
- function MyCylinder(scene, slices, stacks, minS,maxS, minT, maxT) {
+ function MyPrism(scene, slices, stacks) {
  	CGFobject.call(this,scene);
 	
-	this.minS = minS || 0;
-	this.maxS = maxS || 1;
-	this.minT = minT || 0;
-	this.maxT = maxT || 1;
-
 	this.slices=slices;
 	this.stacks=stacks;
+
  	this.initBuffers();
+ };
 
- 	this.cylinderAppearence = new CGFappearance(this.scene);
-	this.cylinderAppearence.setAmbient(1, 1, 1, 0.5);
-	this.cylinderAppearence.setDiffuse(1, 1, 1, 0.2);
-	this.cylinderAppearence.setSpecular(1, 1, 1, 0.1);
-	this.cylinderAppearence.setShininess(1);
-	this.cylinderAppearence.loadTexture('../resources/images/cylinder.png');
-};
+ MyPrism.prototype = Object.create(CGFobject.prototype);
+ MyPrism.prototype.constructor = MyPrism;
 
- MyCylinder.prototype = Object.create(CGFobject.prototype);
- MyCylinder.prototype.constructor = MyCylinder;
-
- MyCylinder.prototype.initBuffers = function() {
+ MyPrism.prototype.initBuffers = function() {
 
 	var degToRad = Math.PI / 180.0;
 
 	var ang = 360 * degToRad / this.slices;
+	var half_ang = ang / 2;
 
 	this.vertices = [];
 	this.indices = [];
 	this.normals = [];
-	this.texCoords = [];
 
 	var ind_j = 0;
 	var aux_j = 4 * this.slices;
@@ -84,37 +73,22 @@
 
 			ind_i += 4;
 
-			// normal a vertice 0
-			this.normals.push(x0);
-			this.normals.push(y0);
-			this.normals.push(0);
-			
-			// normal a vertice 1
-            this.normals.push(x1);
-			this.normals.push(y1);
-			this.normals.push(0);
+			var ang_aux = ang_now + half_ang;
 
-			// normal a vertice 2
-			this.normals.push(x0);
-			this.normals.push(y0);
-			this.normals.push(0);
-			
-			// normal a vertice 3
-            this.normals.push(x1);
-			this.normals.push(y1);
-			this.normals.push(0);
+			var xn = Math.cos(ang_aux);
+			var yn = Math.sin(ang_aux);
+			var zn = 0;
 
-			// coordenadas textura
-			this.texCoords.push(i*this.slices / this.stacks + this.minS, j*this.slices / this.stacks + this.minT);
-		}			
-
+			for (k = 0; k < 4; k++) {
+				this.normals.push(xn);
+				this.normals.push(yn);
+				this.normals.push(zn);
+			}			
+		}
 		ind_j += aux_j;
-
 	}
 
-	
-		
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();
-
+ 	
  };

@@ -32,11 +32,12 @@ LightingScene.prototype.init = function(application) {
 	this.axis = new CGFaxis(this);
 
 	// Scene elements
+	this.ball = new MyBall(this, 8, 8);
 	this.lamp = new MyLamp(this, 8, 4);
 	this.cylinder = new MyCylinder(this, 8, 20);
-	this.prism = new MyPrism(this, 8, 20);
 	this.table = new MyTable(this);
 	this.chair = new MyChair(this);
+	this.clock = new MyClock(this, 12, 4);
 
 	this.floor = new MyQuad(this, 0.0, 10.0, 0.0, 12.0);
 	this.leftWall = new MyQuad(this, -1, 2, -0.5, 1.5);
@@ -61,9 +62,9 @@ LightingScene.prototype.init = function(application) {
 	this.materialB.setShininess(120);
 	
 	this.materialW = new CGFappearance(this);
-	this.materialW.setAmbient(1, 1, 1, 0.2);
-	this.materialW.setDiffuse(1, 1, 1, 0.2);
-	this.materialW.setSpecular(1, 1, 1, 0.1);
+	this.materialW.setAmbient(0, 0, 0, 0.2);
+	this.materialW.setDiffuse(0, 0, 0, 0.2);
+	this.materialW.setSpecular(0, 0, 0, 0.1);
 	this.materialW.setShininess(10);
 
 	this.materialF = new CGFappearance(this);
@@ -104,6 +105,21 @@ LightingScene.prototype.init = function(application) {
 	this.boardAppearance.setSpecular(1, 1, 1, 0.6);
 	this.boardAppearance.setShininess(120);
 	this.boardAppearance.loadTexture('../resources/images/board.png');
+
+	this.cylinderAppearance = new CGFappearance(this);
+	this.cylinderAppearance.setAmbient(1, 1, 1, 0.8);
+	this.cylinderAppearance.setDiffuse(1, 1, 1, 0.8);
+	this.cylinderAppearance.setSpecular(1, 1, 1, 0.6);	
+	this.cylinderAppearance.setShininess(10);
+	this.cylinderAppearance.loadTexture('../resources/images/cylinder.png');
+
+	this.ballAppearance = new CGFappearance(this);
+	this.ballAppearance.setAmbient(1, 1, 1, 0.8);
+	this.ballAppearance.setDiffuse(1, 1, 1, 0.8);
+	this.ballAppearance.setSpecular(1, 1, 1, 0.6);	
+	this.ballAppearance.setShininess(10);
+	this.ballAppearance.loadTexture('../resources/images/ball.png');
+
 };
 
 LightingScene.prototype.initCameras = function() {
@@ -121,13 +137,13 @@ LightingScene.prototype.initLights = function() {
 	//this.lights[2].setPosition(12, 6.0, 9.0, 1.0);
 	//this.lights[3].setPosition(4.5, 6.0, 9.0, 1.0);
 	this.lights[2].setPosition(0, 4.0, 7.5, 1.0);
-	this.lights[3].setPosition(8.25, 6.0, 9.0, 1.0);
+	this.lights[3].setPosition(8.25, 6.0, 14.0, 1.0);
 
 	this.lights[0].setAmbient(0.0, 0.0, 0.0, 1.0);
 	this.lights[0].setDiffuse(1.0, 1.0, 1.0, 0.5);
 	this.lights[0].setSpecular(1.0, 1.0, 1.0, 0.5);
 	this.lights[0].setConstantAttenuation(0.0);
-	this.lights[0].setLinearAttenuation(0.8);
+	this.lights[0].setLinearAttenuation(0.4);
 	this.lights[0].setQuadraticAttenuation(0.0);
 	this.lights[0].enable();
 
@@ -135,7 +151,7 @@ LightingScene.prototype.initLights = function() {
 	this.lights[1].setDiffuse(1.0, 1.0, 1.0, 0.5);
 	this.lights[1].setSpecular(1.0, 1.0, 1.0, 0.5);
 	this.lights[1].setConstantAttenuation(0.0);
-	this.lights[1].setLinearAttenuation(0.8);
+	this.lights[1].setLinearAttenuation(0.4);
 	this.lights[1].setQuadraticAttenuation(0.0);
 	this.lights[1].enable();
 
@@ -143,7 +159,7 @@ LightingScene.prototype.initLights = function() {
 	this.lights[2].setDiffuse(1.0, 1.0, 1.0, 0.5);
 	this.lights[2].setSpecular(1.0, 1.0, 1.0, 0.5);
 	this.lights[2].setConstantAttenuation(0.0);
-	this.lights[2].setLinearAttenuation(0.8);
+	this.lights[2].setLinearAttenuation(0.4);
 	this.lights[2].setQuadraticAttenuation(0.0);
 	this.lights[2].enable();
 
@@ -151,7 +167,7 @@ LightingScene.prototype.initLights = function() {
 	this.lights[3].setDiffuse(1.0, 1.0, 1.0, 0.5);
 	this.lights[3].setSpecular(1.0, 1.0, 1.0, 0.5);
 	this.lights[3].setConstantAttenuation(0.0);
-	this.lights[3].setLinearAttenuation(0.8);
+	this.lights[3].setLinearAttenuation(0.4);
 	this.lights[3].setQuadraticAttenuation(0.0);
 	this.lights[3].enable();
 
@@ -322,8 +338,8 @@ LightingScene.prototype.display = function() {
 		this.translate(14, 0, 14);
 		this.scale(0.5, 8, 0.5)
 		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.materialF.apply();
-		this.prism.display();
+		this.cylinderAppearance.apply();
+		this.cylinder.display();
 	this.popMatrix();
 
 	// cilindro
@@ -331,30 +347,29 @@ LightingScene.prototype.display = function() {
 		this.translate(1, 0, 14);
 		this.scale(0.5, 8, 0.5)
 		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.materialF.apply();
-		//this.cylinderAppearence.apply();
+//		this.materialF.apply();
+		this.cylinderAppearance.apply();
 		this.cylinder.display();
 	this.popMatrix();
 
 	//candeeiros
 	this.pushMatrix();
 		this.translate(4.5, 6.0, 4.0);
-		this.materialF.apply();
+		this.cylinderAppearance.apply();
 		this.lamp.display();
 	this.popMatrix();
 	
 	this.pushMatrix();
 		this.translate(12, 6.0, 4.0);
-		this.materialF.apply();
+		this.cylinderAppearance.apply();
 		this.lamp.display();
 	this.popMatrix();
 
 	this.pushMatrix();
-		this.translate(8.25, 6.0, 9.0);
-		this.materialF.apply();
+		this.translate(8.25, 6.0, 14.0);
+		this.cylinderAppearance.apply();
 		this.lamp.display();
 	this.popMatrix();
-
 
 /**	this.pushMatrix();
 		this.translate(12, 6.0, 9.0);
@@ -375,7 +390,7 @@ LightingScene.prototype.display = function() {
 		this.translate(4.5, 6.9, 4);
 		this.scale(0.1, 1.1, 0.1)
 		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.materialF.apply();
+		this.cylinderAppearance.apply();
 		this.cylinder.display();
 	this.popMatrix();
 
@@ -391,7 +406,7 @@ LightingScene.prototype.display = function() {
 		this.translate(12, 6.9, 4);
 		this.scale(0.1, 1.1, 0.1)
 		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.materialF.apply();
+		this.cylinderAppearance.apply();
 		this.cylinder.display();
 	this.popMatrix();
 
@@ -405,12 +420,40 @@ LightingScene.prototype.display = function() {
 */
 	
 	this.pushMatrix();
-	this.translate(8.25, 6.9, 9);
+	this.translate(8.25, 6.9, 14);
 	this.scale(0.1, 1.1, 0.1)
 	this.rotate(-90 * degToRad, 1, 0, 0);
-	this.materialF.apply();
+	this.cylinderAppearance.apply();
 	this.cylinder.display();
 	this.popMatrix();
+
+// globo
+	this.pushMatrix();
+		this.translate(13.5, 0, 1.5);
+		this.scale(0.8,0.3,1);
+		this.materialA.apply();
+		this.lamp.display();
+	this.popMatrix();
+	this.pushMatrix();
+		this.translate(13.5, 0.3, 1.5);
+		this.scale(0.1, 1.1, 0.1)
+		this.rotate(-90 * degToRad, 1, 0, 0);
+		this.materialA.apply();
+		this.cylinder.display();
+	this.popMatrix();
+	this.pushMatrix();
+		this.translate(13.5, 1.9, 1.5);
+		this.ballAppearance.apply();
+		this.ball.display();
+	this.popMatrix();
+
+	this.pushMatrix();
+		this.translate(7.25, 7.2, 0);
+		this.scale(0.7, 0.7, 0.2)
+		this.clock.display();
+	this.popMatrix();
+
+
 
 	// ---- END Primitive drawing section
 
