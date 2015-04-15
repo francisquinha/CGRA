@@ -105,10 +105,10 @@
 			this.normals.push(z3);
 
 			// coordenadas textura
-			this.texCoords.push(i / this.slices, j / this.stacks);
-			this.texCoords.push((i + 1) / this.slices, j / this.stacks);
-			this.texCoords.push(i / this.slices, (j + 1) / this.stacks);
-			this.texCoords.push((i + 1) / this.slices, (j + 1) / this.stacks);
+			this.texCoords.push(1 - i / this.slices, j / this.stacks);
+			this.texCoords.push(1 - (i + 1) / this.slices, j / this.stacks);
+			this.texCoords.push(1 - i / this.slices, (j + 1) / this.stacks);
+			this.texCoords.push(1 - (i + 1) / this.slices, (j + 1) / this.stacks);
 
 		}			
 

@@ -443,6 +443,7 @@ LightingScene.prototype.display = function() {
 	this.popMatrix();
 	this.pushMatrix();
 		this.translate(13.5, 1.9, 1.5);
+		this.rotate(120 * degToRad, 0, 1, 0);
 		this.ballAppearance.apply();
 		this.ball.display();
 	this.popMatrix();

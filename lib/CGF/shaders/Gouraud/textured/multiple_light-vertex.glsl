@@ -2,6 +2,8 @@ attribute vec3 aVertexPosition;
 attribute vec3 aVertexNormal;
 attribute vec2 aTextureCoord;
 
+uniform bool uUseTexture;
+
 struct lightProperties {
     vec4 position;                  // Default: (0, 0, 1, 0)
     vec4 ambient;                   // Default: (0, 0, 0, 1)
@@ -14,7 +16,7 @@ struct lightProperties {
     float constant_attenuation;     // Default: 1 (value must be >= 0)
     float linear_attenuation;       // Default: 0 (value must be >= 0)
     float quadratic_attenuation;    // Default: 0 (value must be >= 0)
-    bool enabled;                   // Deafult: false
+    bool enabled;                   // Default: false
 };
 
 struct materialProperties {
@@ -32,9 +34,11 @@ uniform mat4 uNMatrix;
 uniform bool uLightEnabled;
 uniform bool uLightModelTwoSided;
 
-// uniform vec4 uGlobalAmbient;
 
-#define NUMBER_OF_LIGHTS 4
+
+#define NUMBER_OF_LIGHTS 8
+
+uniform vec4 uGlobalAmbient;
 
 uniform lightProperties uLight[NUMBER_OF_LIGHTS];
 
@@ -83,7 +87,7 @@ vec4 lighting(vec4 vertex, vec3 E, vec3 N) {
             vec4 Is = vec4(0.0, 0.0, 0.0, 0.0);
 
             if (lambertTerm > 0.0) {
-                vec3 R = reflect(L, N);
+                vec3 R = reflect(-L, N);
                 float specular = pow( max( dot(R, E), 0.0 ), uFrontMaterial.shininess);
 
                 Is = uLight[i].specular * uFrontMaterial.specular * specular;
@@ -96,6 +100,7 @@ vec4 lighting(vec4 vertex, vec3 E, vec3 N) {
         }
     }
 
+	result += uGlobalAmbient * uFrontMaterial.ambient;
     result = clamp(result, vec4(0.0), vec4(1.0));
 
     result.a = 1.0;
@@ -116,6 +121,9 @@ void main() {
     vFinalColor = lighting(vertex, E, N);
 
 	gl_Position = uPMatrix * vertex;
-    vTextureCoord = aTextureCoord;
+
+    if (uUseTexture)
+        vTextureCoord = aTextureCoord;
+
 }
 
