@@ -32,8 +32,8 @@ LightingScene.prototype.init = function(application) {
 	this.axis = new CGFaxis(this);
 
 	// Scene elements
-	this.ball = new MyBall(this, 8, 8);
-	this.lamp = new MyLamp(this, 8, 4);
+	this.ball = new MyBall(this, 16, 16);
+	this.lamp = new MyLamp(this, 16, 8);
 	this.cylinder = new MyCylinder(this, 8, 20);
 	this.table = new MyTable(this);
 	this.chair = new MyChair(this);
@@ -443,6 +443,7 @@ LightingScene.prototype.display = function() {
 	this.popMatrix();
 	this.pushMatrix();
 		this.translate(13.5, 1.9, 1.5);
+		this.rotate(120 * degToRad, 0, 1, 0);
 		this.ballAppearance.apply();
 		this.ball.display();
 	this.popMatrix();
