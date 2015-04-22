@@ -120,6 +120,8 @@ LightingScene.prototype.init = function(application) {
 	this.ballAppearance.setShininess(10);
 	this.ballAppearance.loadTexture('../resources/images/ball.png');
 
+	this.setUpdatePeriod(100);
+
 };
 
 LightingScene.prototype.initCameras = function() {
@@ -448,6 +450,7 @@ LightingScene.prototype.display = function() {
 		this.ball.display();
 	this.popMatrix();
 
+	//clock
 	this.pushMatrix();
 		this.translate(7.25, 7.2, 0);
 		this.scale(0.7, 0.7, 0.2)
@@ -459,4 +462,8 @@ LightingScene.prototype.display = function() {
 	// ---- END Primitive drawing section
 
 	this.shader.unbind();
+};
+
+LightingScene.prototype.update = function (currTime) {
+	this.clock.update(currTime);
 };
