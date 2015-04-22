@@ -457,13 +457,11 @@ LightingScene.prototype.display = function() {
 		this.clock.display();
 	this.popMatrix();
 
-
-
 	// ---- END Primitive drawing section
 
 	this.shader.unbind();
 };
 
 LightingScene.prototype.update = function (currTime) {
-//	this.clock.update(currTime);
+	this.clock.update(currTime);
 };
