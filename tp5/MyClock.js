@@ -45,10 +45,10 @@
 	this.clockAppearance.setShininess(10);
 	this.clockAppearance.loadTexture('../resources/images/clock.png');
 
-	this.milisegundos = currTime;
-	this.hora = this.milisegundos / 3600000;
-	this.minuto = this.milisegundos / 60000 - this.hora * 60;
-	this.segundo = this.milisegundos / 1000 - this.hora * 360 - this.minuto * 60;
+//	this.milisegundos = currTime;
+//	this.hora = this.milisegundos / 3600000;
+//	this.minuto = this.milisegundos / 60000 - this.hora * 60;
+//	this.segundo = this.milisegundos / 1000 - this.hora * 360 - this.minuto * 60;
 	
  };
 
@@ -71,21 +71,21 @@ MyClock.prototype.display = function() {
 	this.scene.pushMatrix();
 	this.scene.translate(0, 0, 1);
     this.materialH.apply();
-    this.horas.setAngle(this.hora);
+    this.horas.setAngle(/*this.hora*/90);
 	this.horas.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
 	this.scene.translate(0, 0, 1);
     this.materialH.apply();
-    this.minutos.setAngle(this.minuto);
+    this.minutos.setAngle(/*this.minuto*/180);
 	this.minutos.display();
 	this.scene.popMatrix();
 
 	this.scene.pushMatrix();
 	this.scene.translate(0, 0, 1);
     this.materialS.apply();
-    this.segundos.setAngle(this.segundo);
+    this.segundos.setAngle(/*this.segundo*/270);
 	this.segundos.display();
 	this.scene.popMatrix();
 
