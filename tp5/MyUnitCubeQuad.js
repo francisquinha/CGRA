@@ -55,5 +55,4 @@ MyUnitCubeQuad.prototype.display = function() {
     this.scene.translate(0, 0, 0.5);
     this.quad.display(); // esquerda - coloca na frente e depois roda para a esquerda
     this.scene.popMatrix();
-
 }

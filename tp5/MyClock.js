@@ -46,7 +46,7 @@
 	this.clockAppearance.loadTexture('../resources/images/clock.png');
 
     var currentTime = new Date();
-	this.milisegundos = currentTime.getMilliseconds() ;
+	this.milisegundos = currentTime.getMilliseconds();
     this.segundo = currentTime.getSeconds();
     this.minuto = currentTime.getMinutes();
     this.hora = currentTime.getHours();
@@ -88,7 +88,6 @@ MyClock.prototype.display = function() {
     this.segundos.setAngle(this.segundo * 6);
 	this.segundos.display();
 	this.scene.popMatrix();
-
 };
 
 MyClock.prototype.update = function (currTime) {

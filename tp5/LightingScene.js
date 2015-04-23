@@ -38,6 +38,8 @@ LightingScene.prototype.init = function(application) {
 	this.table = new MyTable(this);
 	this.chair = new MyChair(this);
 	this.clock = new MyClock(this, 12, 4);
+	this.paperPlane = new MyPaperPlane(this);
+
 
 	this.floor = new MyQuad(this, 0.0, 10.0, 0.0, 12.0);
 	this.leftWall = new MyQuad(this, -1, 2, -0.5, 1.5);
@@ -457,6 +459,12 @@ LightingScene.prototype.display = function() {
 		this.clock.display();
 	this.popMatrix();
 
+
+//plane
+	this.pushMatrix();
+		this.translate(12, 4.2, 8);
+		this.paperPlane.display();
+	this.popMatrix();
 	// ---- END Primitive drawing section
 
 	this.shader.unbind();
@@ -464,4 +472,5 @@ LightingScene.prototype.display = function() {
 
 LightingScene.prototype.update = function (currTime) {
 	this.clock.update(currTime);
+	this.paperPlane.update(currTime);
 };

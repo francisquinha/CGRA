@@ -26,7 +26,6 @@ MyClockHand.prototype.initBuffers = function () {
 	this.indices = [
             0, 1, 2, 
         ];
-		
 
     this.normals = [ 0, 0, 1,
                      0, 0, 1,
@@ -41,11 +40,9 @@ MyClockHand.prototype.setAngle = function (angle) {
 };
 
 MyClockHand.prototype.display = function() {
-
     this.scene.pushMatrix();
 	this.scene.rotate(-this.angle, 0, 0, 1);
 	this.scene.scale(this.width, this.height, 1);
     CGFobject.prototype.display.call(this);
     this.scene.popMatrix();
-
 };
