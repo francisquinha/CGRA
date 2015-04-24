@@ -5,11 +5,11 @@
  function MyPaperPlane(scene, XOffset, YOffset, ZOffset, velX, velY, velZ) {
 	CGFobject.call(this,scene);
 
-	this.wing1 = new MyWings(scene);
+	this.wing1 = new MyWings(scene, 1, 1, 0,1,0,1);
 	this.wing1.initBuffers();
-	this.wing2 = new MyWings(scene, 1, 1);
+	this.wing2 = new MyWings(scene, 1, 1, 0,1,0,1);
 	this.wing2.initBuffers();
-	this.wing3 = new MyWings(scene, 1, 1);
+	this.wing3 = new MyWings(scene, 1, 1, 0,1,0,1);
 	this.wing3.initBuffers();
 	this.Xini = XOffset;
 	this.Yini = YOffset;
@@ -28,6 +28,14 @@
 	this.velY = velY;
 	this.velZ = velZ;
 
+
+	this.wingsAppearance = new CGFappearance(this.scene);
+	this.wingsAppearance.setAmbient(1, 1, 1, 0.5);
+	this.wingsAppearance.setDiffuse(1, 1, 1, 0.2);
+	this.wingsAppearance.setSpecular(1, 1, 1, 0.1);
+	this.wingsAppearance.setShininess(1);
+	this.wingsAppearance.loadTexture('../resources/images/wings.png');
+
  };
 
  MyPaperPlane.prototype = Object.create(CGFobject.prototype);
@@ -43,10 +51,7 @@ MyPaperPlane.prototype.setTranslate = function (XOffset, YOffset, ZOffset) {
 	this.ZOffset = ZOffset;
 };
 
-
-
 MyPaperPlane.prototype.display = function() {
-
 
     this.scene.pushMatrix();
 	this.scene.translate(this.XOffset, this.YOffset, this.ZOffset);
@@ -55,16 +60,17 @@ MyPaperPlane.prototype.display = function() {
 	this.scene.scale(1.7, 1, 1);
 	this.scene.rotate(45 * degToRad, 0, 1, 0);
 	this.scene.rotate(90 * degToRad, 1, 0, 0);
+	this.wingsAppearance.apply();
     this.wing2.display();
     this.scene.popMatrix(); 
 	this.scene.pushMatrix();
 	this.scene.translate(1.2, 0, 0);
 	this.scene.rotate(180 * degToRad, 0, 0, 1);
 	this.scene.scale(1.2, 0.5, 1);
+	//this.wingsAppearance.apply();
     this.wing1.display();
     this.scene.popMatrix();
     this.scene.popMatrix();
-
 };
 
 MyPaperPlane.prototype.update = function (currTime) {
