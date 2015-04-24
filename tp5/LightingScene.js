@@ -38,8 +38,7 @@ LightingScene.prototype.init = function(application) {
 	this.table = new MyTable(this);
 	this.chair = new MyChair(this);
 	this.clock = new MyClock(this, 12, 4);
-	this.paperPlane = new MyPaperPlane(this, 12, 5, 5, -0.003, -0.003, 0.001);
-//	this.paperPlane = new MyPaperPlane(this, 0, 0, 0, 0, 0);
+	this.paperPlane = new MyPaperPlane(this, 12, 4.4, 8, -0.003, 0.0002, -0.004, 0.0004);
 	
 	this.floor = new MyQuad(this, 0.0, 10.0, 0.0, 12.0);
 	this.leftWall = new MyQuad(this, -1, 2, -0.5, 1.5);

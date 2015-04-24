@@ -2,7 +2,7 @@
  * MyPaperPlane
  * @constructor
  */
- function MyPaperPlane(scene, XOffset, YOffset, ZOffset, velX, velY, velZ) {
+ function MyPaperPlane(scene, XOffset, YOffset, ZOffset, velX, velY1, velY2, velZ) {
 	CGFobject.call(this,scene);
 
 	this.wing1 = new MyWings(scene, 1, 1, 0,1,0,1);
@@ -14,6 +14,7 @@
 	this.Xini = XOffset;
 	this.Yini = YOffset;
 	this.Zini = ZOffset;
+	this.Yhitwall = YOffset;
 	this.XOffset = XOffset;
 	this.YOffset = YOffset;
 	this.ZOffset = ZOffset;
@@ -25,7 +26,8 @@
 	this.hitwall = Date.now();
 
 	this.velX = velX;
-	this.velY = velY;
+	this.velY1 = velY1;
+	this.velY2 = velY2;
 	this.velZ = velZ;
 
 
@@ -74,25 +76,24 @@ MyPaperPlane.prototype.display = function() {
 };
 
 MyPaperPlane.prototype.update = function (currTime) {
-	var elapsedX = currTime - this.milisegundos;
-	var elapsedY = currTime - this.hitwall;
+
+	var elapsed1 = currTime - this.milisegundos;
+	var elapsed2 = currTime - this.hitwall;
 	if (this.XOffset > 0.01) {
 		this.hitwall = Date.now();
-		this.XOffset = this.Xini + elapsedX * this.velX;
-		this.ZOffset = this.Zini + elapsedX * this.velZ;
+		this.XOffset = this.Xini + elapsed1 * this.velX;
+		this.YOffset = this.Yini + elapsed1 * this.velY1;
+		this.ZOffset = this.Zini + elapsed1 * this.velZ;
+		this.Yhitwall = this.YOffset;
 		if (this.XOffset < 0.01) this.XOffset = 0.01;
 	}
-	else if (this.XOffset == 0.01 && this.YOffset == this.Yini) {
+	else if (this.XOffset == 0.01 && this.YOffset > 0.01) {
 		this.setAngle(90);
-		this.YOffset = this.Yini + elapsedY * this.velY;
-	}
-	else if (this.YOffset > 0.01) {
-		this.YOffset = this.Yini + elapsedY * this.velY;
+		this.YOffset = this.Yhitwall + elapsed2 * this.velY2;
 		if (this.YOffset < 0.01) this.YOffset = 0.01;
 	}
 	else if (this.XOffset == 0.01 && this.YOffset == 0.01) {
 		this.setAngle(25);
-//		this.YOffset = this.Yini + elapsedY * this.velY;
 	}
 
 };
