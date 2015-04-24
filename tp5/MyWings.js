@@ -4,14 +4,8 @@
  * @constructor
  */
 
-function MyWings(scene,minS,maxS,minT,maxT) {
+function MyWings(scene) {
 	CGFobject.call(this,scene);
-
-	this.minS = minS || 0;
-	this.maxS = maxS || 1;
-	this.minT = minT || 0;
-	this.maxT = maxT || 1;
-
 	this.initBuffers();
 };
 
@@ -21,25 +15,27 @@ MyWings.prototype.constructor=MyWings;
 MyWings.prototype.initBuffers = function () {
 	this.vertices = [
             0, 0, 0,
-             1, 0, 0,
-               0, 1, 0 ];
+            1, 0, 0,
+            0, 1, 0,
+          	0, 0, 0 ];
 
 	this.indices = [
             0, 1, 2, 
-            0, 2, 1
+            3, 2, 1
         ];
 
     this.normals = [ 0, 0, 1,
+                     0, 0, 1,
                      0, 0, 1,
                      0, 0, 1 ];
 
 
 	this.texCoords = [
     
-		this.minS, this.maxT,
-		this.maxS, this.maxT,
-		this.minS, this.minT,
-		this.maxS, this.minT
+		0, 1,
+		1, 1,
+		0, 0,
+		1, 0
 		];
 
 

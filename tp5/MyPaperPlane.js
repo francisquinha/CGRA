@@ -5,12 +5,12 @@
  function MyPaperPlane(scene, XOffset, YOffset, ZOffset, velX, velY1, velY2, velZ) {
 	CGFobject.call(this,scene);
 
-	this.wing1 = new MyWings(scene, 1, 1, 0,1,0,1);
+	this.body = new MyWings(scene, 1, 1);
+	this.body.initBuffers();
+	this.wing1 = new MyWings(scene, 1, 1);
 	this.wing1.initBuffers();
-	this.wing2 = new MyWings(scene, 1, 1, 0,1,0,1);
+	this.wing2 = new MyWings(scene, 1, 1);
 	this.wing2.initBuffers();
-	this.wing3 = new MyWings(scene, 1, 1, 0,1,0,1);
-	this.wing3.initBuffers();
 	this.Xini = XOffset;
 	this.Yini = YOffset;
 	this.Zini = ZOffset;
@@ -36,7 +36,7 @@
 	this.wingsAppearance.setDiffuse(1, 1, 1, 0.2);
 	this.wingsAppearance.setSpecular(1, 1, 1, 0.1);
 	this.wingsAppearance.setShininess(1);
-	this.wingsAppearance.loadTexture('../resources/images/wings.png');
+	this.wingsAppearance.loadTexture('../resources/images/squares.png');
 
  };
 
@@ -58,20 +58,31 @@ MyPaperPlane.prototype.display = function() {
     this.scene.pushMatrix();
 	this.scene.translate(this.XOffset, this.YOffset, this.ZOffset);
 	this.scene.rotate(this.angle, 0, 0, 1);
+
 	this.scene.pushMatrix();
-	this.scene.scale(1.7, 1, 1);
-	this.scene.rotate(45 * degToRad, 0, 1, 0);
-	this.scene.rotate(90 * degToRad, 1, 0, 0);
-	this.wingsAppearance.apply();
-    this.wing2.display();
+		this.scene.translate(1.2, 0, 0);
+		this.scene.scale(1.2, 1, 0.4);
+		this.scene.rotate(180 * degToRad, 0, 0, 1);
+		this.scene.rotate(90 * degToRad, 1, 0, 0);
+		this.wingsAppearance.apply();
+    	this.wing1.display();
     this.scene.popMatrix(); 
+
 	this.scene.pushMatrix();
-	this.scene.translate(1.2, 0, 0);
-	this.scene.rotate(180 * degToRad, 0, 0, 1);
-	this.scene.scale(1.2, 0.5, 1);
-	//this.wingsAppearance.apply();
-    this.wing1.display();
+		this.scene.translate(1.2, 0, 0);
+		this.scene.scale(1.2, 1, 0.4);
+		this.scene.rotate(90 * degToRad, 0, 1, 0);
+		this.scene.rotate(-90 * degToRad, 1, 0, 0);
+    	this.wing2.display();
+    this.scene.popMatrix(); 
+
+	this.scene.pushMatrix();
+		this.scene.translate(1.2, 0, 0);
+		this.scene.rotate(180 * degToRad, 0, 0, 1);
+		this.scene.scale(1.2, 0.5, 1);
+    	this.body.display();
     this.scene.popMatrix();
+
     this.scene.popMatrix();
 };
 
