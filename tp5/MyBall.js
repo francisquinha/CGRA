@@ -8,6 +8,8 @@
 	this.slices=slices;
 	this.stacks=stacks;
 
+	this.milisegundos = 0;
+
  	this.initBuffers();
  };
 
@@ -122,3 +124,19 @@
  	this.initGLBuffers();
 
  };
+
+
+MyBall.prototype.setAngle = function (angle) {
+	this.angle = angle * degToRad;
+};
+
+MyBall.prototype.display = function() {
+    this.scene.pushMatrix();
+	this.scene.rotate(-this.angle, 0, 1, 0);
+    CGFobject.prototype.display.call(this);
+    this.scene.popMatrix();
+};
+
+MyBall.prototype.update = function (currTime) {
+	this.angle = (currTime - this.milisegundos) / 2000;
+};

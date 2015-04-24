@@ -45,11 +45,8 @@
 	this.clockAppearance.setShininess(10);
 	this.clockAppearance.loadTexture('../resources/images/clock.png');
 
-    var currentTime = new Date();
-	this.milisegundos = currentTime.getMilliseconds();
-    this.segundo = currentTime.getSeconds();
-    this.minuto = currentTime.getMinutes();
-    this.hora = currentTime.getHours();
+    var currentTime = Date.now();
+	this.milisegundos = 0;
  };
 
  MyClock.prototype = Object.create(CGFobject.prototype);

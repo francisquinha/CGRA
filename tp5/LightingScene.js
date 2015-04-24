@@ -38,9 +38,9 @@ LightingScene.prototype.init = function(application) {
 	this.table = new MyTable(this);
 	this.chair = new MyChair(this);
 	this.clock = new MyClock(this, 12, 4);
-	this.paperPlane = new MyPaperPlane(this);
-
-
+	this.paperPlane = new MyPaperPlane(this, 12, 5, 5, -0.003, -0.003, 0.001);
+//	this.paperPlane = new MyPaperPlane(this, 0, 0, 0, 0, 0);
+	
 	this.floor = new MyQuad(this, 0.0, 10.0, 0.0, 12.0);
 	this.leftWall = new MyQuad(this, -1, 2, -0.5, 1.5);
 
@@ -58,10 +58,10 @@ LightingScene.prototype.init = function(application) {
 	this.materialA.setShininess(10);
 
 	this.materialB = new CGFappearance(this);
-	this.materialB.setAmbient(1.0, 1.0, 1.0, 0.1);
-	this.materialB.setDiffuse(1.0, 1.0, 1.0, 0.1);
-	this.materialB.setSpecular(1.0, 1.0, 1.0, 1);	
-	this.materialB.setShininess(120);
+	this.materialB.setAmbient(1.0, 1.0, 1.0, 0.9);
+	this.materialB.setDiffuse(1.0, 1.0, 1.0, 0.9);
+	this.materialB.setSpecular(1.0, 1.0, 1.0, 0.2);	
+	this.materialB.setShininess(10);
 	
 	this.materialW = new CGFappearance(this);
 	this.materialW.setAmbient(0, 0, 0, 0.2);
@@ -351,7 +351,6 @@ LightingScene.prototype.display = function() {
 		this.translate(1, 0, 14);
 		this.scale(0.5, 8, 0.5)
 		this.rotate(-90 * degToRad, 1, 0, 0);
-//		this.materialF.apply();
 		this.cylinderAppearance.apply();
 		this.cylinder.display();
 	this.popMatrix();
@@ -462,7 +461,7 @@ LightingScene.prototype.display = function() {
 
 //plane
 	this.pushMatrix();
-		this.translate(12, 4.2, 8);
+		this.materialB.apply();
 		this.paperPlane.display();
 	this.popMatrix();
 	// ---- END Primitive drawing section
@@ -473,4 +472,5 @@ LightingScene.prototype.display = function() {
 LightingScene.prototype.update = function (currTime) {
 	this.clock.update(currTime);
 	this.paperPlane.update(currTime);
+	this.ball.update(currTime);
 };

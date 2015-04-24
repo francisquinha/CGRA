@@ -2,39 +2,91 @@
  * MyPaperPlane
  * @constructor
  */
- function MyPaperPlane(scene) {
+ function MyPaperPlane(scene, XOffset, YOffset, ZOffset, velX, velY, velZ) {
 	CGFobject.call(this,scene);
 
-this.wing1 = new MyWings(scene, 1, 1);
-this.wing1.initBuffers();
+	this.wing1 = new MyWings(scene);
+	this.wing1.initBuffers();
+	this.wing2 = new MyWings(scene, 1, 1);
+	this.wing2.initBuffers();
+	this.wing3 = new MyWings(scene, 1, 1);
+	this.wing3.initBuffers();
+	this.Xini = XOffset;
+	this.Yini = YOffset;
+	this.Zini = ZOffset;
+	this.XOffset = XOffset;
+	this.YOffset = YOffset;
+	this.ZOffset = ZOffset;
+	
+	this.angle = 0;
 
+	this.milisegundos = Date.now();
 
-	this.clockAppearance = new CGFappearance(this.scene);
-	this.clockAppearance.setAmbient(0.5, 0.5, 0.5, 0.8);
-	this.clockAppearance.setDiffuse(0.5, 0.5, 0.5, 0.8);
-	this.clockAppearance.setSpecular(0.5, 0.5, 0.5, 0.6);	
-	this.clockAppearance.setShininess(10);
-	//this.clockAppearance.loadTexture('../resources/images/clock.png');
+	this.hitwall = Date.now();
 
-    var currentTime = new Date();
-	this.milisegundos = currentTime.getMilliseconds();
-    this.timeCreate = currentTime.getSeconds();
+	this.velX = velX;
+	this.velY = velY;
+	this.velZ = velZ;
+
  };
 
  MyPaperPlane.prototype = Object.create(CGFobject.prototype);
  MyPaperPlane.prototype.constructor = MyPaperPlane;
 
+MyPaperPlane.prototype.setAngle = function (angle) {
+	this.angle = angle * degToRad;
+};
+
+MyPaperPlane.prototype.setTranslate = function (XOffset, YOffset, ZOffset) {
+	this.XOffset = XOffset;
+	this.YOffset = YOffset;
+	this.ZOffset = ZOffset;
+};
+
+
+
 MyPaperPlane.prototype.display = function() {
 
-  //this.scene.translate(0, 3.55, 0);
-	this.scene.pushMatrix(); 
-	//this.wing1.setAngle(this.segundo * 60);
-	this.wing1.setTranslate(0.5);	
-   	//console.log(this.segundo / 10000000000);
+
+    this.scene.pushMatrix();
+	this.scene.translate(this.XOffset, this.YOffset, this.ZOffset);
+	this.scene.rotate(this.angle, 0, 0, 1);
+	this.scene.pushMatrix();
+	this.scene.scale(1.7, 1, 1);
+	this.scene.rotate(45 * degToRad, 0, 1, 0);
+	this.scene.rotate(90 * degToRad, 1, 0, 0);
+    this.wing2.display();
+    this.scene.popMatrix(); 
+	this.scene.pushMatrix();
+	this.scene.translate(1.2, 0, 0);
+	this.scene.rotate(180 * degToRad, 0, 0, 1);
+	this.scene.scale(1.2, 0.5, 1);
     this.wing1.display();
     this.scene.popMatrix();
+    this.scene.popMatrix();
+
 };
 
 MyPaperPlane.prototype.update = function (currTime) {
-	this.segundo = (currTime - this.milisegundos) / 1000;
+	var elapsedX = currTime - this.milisegundos;
+	var elapsedY = currTime - this.hitwall;
+	if (this.XOffset > 0.01) {
+		this.hitwall = Date.now();
+		this.XOffset = this.Xini + elapsedX * this.velX;
+		this.ZOffset = this.Zini + elapsedX * this.velZ;
+		if (this.XOffset < 0.01) this.XOffset = 0.01;
+	}
+	else if (this.XOffset == 0.01 && this.YOffset == this.Yini) {
+		this.setAngle(90);
+		this.YOffset = this.Yini + elapsedY * this.velY;
+	}
+	else if (this.YOffset > 0.01) {
+		this.YOffset = this.Yini + elapsedY * this.velY;
+		if (this.YOffset < 0.01) this.YOffset = 0.01;
+	}
+	else if (this.XOffset == 0.01 && this.YOffset == 0.01) {
+		this.setAngle(25);
+//		this.YOffset = this.Yini + elapsedY * this.velY;
+	}
+
 };
