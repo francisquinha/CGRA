@@ -36,6 +36,9 @@ LightingScene.prototype.init = function(application) {
 	this.axis = new CGFaxis(this);
 
 	// Scene elements
+
+	this.robot = new MyRobot(this, 8.3, 5, 5, 0);
+
 	this.ball = new MyBall(this, 16, 16);
 	this.lamp = new MyLamp(this, 16, 8);
 	this.cylinder = new MyCylinder(this, 8, 20);
@@ -469,6 +472,15 @@ LightingScene.prototype.display = function() {
 	this.popMatrix();
 	// ---- END Primitive drawing section
 
+
+//robot
+
+this.pushMatrix();
+		this.materialA.apply();
+		this.robot.display();
+	this.popMatrix();
+
+
 	this.shader.unbind();
 };
 
@@ -481,4 +493,23 @@ LightingScene.prototype.update = function (currTime) {
 
 LightingScene.prototype.doSomething = function (){ 
 	console.log("Doing something..."); 
+};
+
+LightingScene.prototype.rotateLeft = function (){ 
+	this.robot.rotateLeft();
+};
+
+
+LightingScene.prototype.rotateRight = function (){ 
+	this.robot.rotateRight();
+};
+
+
+LightingScene.prototype.translateForward = function (){ 
+	this.robot.translateForward();
+};
+
+
+LightingScene.prototype.translateBack = function (){ 
+	this.robot.translateBack();
 };

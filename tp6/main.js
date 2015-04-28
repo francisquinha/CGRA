@@ -20,6 +20,7 @@ serialInclude([
 	'MyPaperPlane.js',
 	'MyWings.js',
 	'MyInterface.js',
+	'MyRobot.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
