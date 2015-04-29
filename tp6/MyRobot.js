@@ -66,13 +66,13 @@ MyRobot.prototype.rotateRight = function () {
 };
 
 MyRobot.prototype.translateForward = function () {
-	this.xOff += 0.1 * Math.cos(this.angle + 180);
-	this.zOff += 0.1 * Math.sin(this.angle + 180);
+	this.xOff += 0.2 * Math.sin(this.angle);
+	this.zOff += 0.2 * Math.cos(this.angle);
 };
 
 MyRobot.prototype.translateBack = function () {
-	this.xOff -= 0; //* Math.cos(this.angle + 180);
-	this.zOff -= 0.1; //* Math.sin(this.angle + 180);
+	this.xOff -= 0.2 * Math.sin(this.angle);
+	this.zOff -= 0.2 * Math.cos(this.angle);
 };
 
 

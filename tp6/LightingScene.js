@@ -37,7 +37,7 @@ LightingScene.prototype.init = function(application) {
 
 	// Scene elements
 
-	this.robot = new MyRobot(this, 8.3, 5, 5, 0);
+	this.robot = new MyRobot(this, 8.3, 5, 5, -140);
 
 	this.ball = new MyBall(this, 16, 16);
 	this.lamp = new MyLamp(this, 16, 8);
