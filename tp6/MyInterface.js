@@ -12,6 +12,14 @@ function MyInterface() {
 MyInterface.prototype = Object.create(CGFinterface.prototype);
 MyInterface.prototype.constructor = MyInterface;
 
+
+var FizzyText = function() {
+  this.changeColor = [ 0, 128, 255 ]; // RGB array
+  console.log("pjdopsajpdjpasjpd");
+};
+
+
+
 /**
  * init
  * @param {CGFapplication} application
@@ -24,25 +32,32 @@ MyInterface.prototype.init = function(application) {
 	//  http://workshop.chromeexperiments.com/examples/gui
 	
 	this.gui = new dat.GUI();
+	this.text = new FizzyText();
 
 	// add a button:
 	// the first parameter is the object that is being controlled (in this case the scene)
 	// the identifier 'doSomething' must be a function declared as part of that object (i.e. a member of the scene class)
 	// e.g. LightingScene.prototype.doSomething = function () { console.log("Doing something..."); }; 
 
-	this.gui.add(this.scene, 'doSomething');	
-
+	this.gui.add(this.scene, 'pauseWatch').name('Pause clock');	
 	// add a group of controls (and open/expand by defult)
 	
-	var group=this.gui.addFolder("Options");
-	group.open();
-
+	var lights = this.gui.addFolder("Lights");
+	lights.open();
+	
 	// add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
 	// e.g. this.option1=true; this.option2=false;
 	
-	group.add(this.scene, 'option1');
-	group.add(this.scene, 'option2');
+	lights.add(this.scene, 'centerLight').name('Center light');
+	lights.add(this.scene, 'rightBoardLight').name('Right board light');
+	lights.add(this.scene, 'leftBoardLight').name('Left board light');
+	lights.add(this.scene, 'windowLight').name('Window light');
 	
+	// Colors
+		
+	var controller = this.gui.addColor(this.text, 'changeColor').name('Change avatar color').listen();
+	
+
 	// add a slider
 	// must be a numeric variable of the scene, initialized in scene.init e.g.
 	// this.speed=3;
@@ -65,19 +80,33 @@ MyInterface.prototype.processKeyboard = function(event) {
 	// or use String.fromCharCode(event.keyCode) to compare chars
 	
 	// for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
-	switch (event.keyCode)
+	switch (event.which || event.keyCode)
 	{
 		case (97):// only works for 'a', as it is
 	      this.scene.rotateLeft();
 	      break;
-		case (100):	//  D
+		case (100):	//  d
 		  this.scene.rotateRight();
 		  break;
-		case (115):	//  S
+		case (115):	//  s
 		  this.scene.translateBack();
 		  break;
-		case (119):	//  W
+		case (119):	//  w
 		  this.scene.translateForward();
 		  break;
 	};
 };
+
+
+/**
+ * processMouse
+ * @param event {Event}
+ */
+/*
+MyInterface.prototype.processMouse = function(event) {
+	// call CGFinterface default code (omit if you want to override)
+	CGFinterface.prototype.processMouse.call(this,event);
+	
+	// for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
+};
+*/

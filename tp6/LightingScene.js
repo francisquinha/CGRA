@@ -15,9 +15,14 @@ LightingScene.prototype.constructor = LightingScene;
 
 LightingScene.prototype.init = function(application) {
 	CGFscene.prototype.init.call(this, application);
-
-	this.option1=true; 
-	this.option2=false; 
+	this.centerLight = true;
+	this.rightBoardLight = true;
+	this.leftBoardLight = true;
+	this.windowLight = true;
+	
+	
+	this.pauseW = false;
+	
 	this.speed=3;
 
 	this.initCameras();
@@ -155,15 +160,16 @@ LightingScene.prototype.initLights = function() {
 	this.lights[0].setConstantAttenuation(0.0);
 	this.lights[0].setLinearAttenuation(0.4);
 	this.lights[0].setQuadraticAttenuation(0.0);
-	this.lights[0].enable();
+	//this.lights[0].enable();
 
+	
 	this.lights[1].setAmbient(0.0, 0.0, 0.0, 1.0);
 	this.lights[1].setDiffuse(1.0, 1.0, 1.0, 0.5);
 	this.lights[1].setSpecular(1.0, 1.0, 1.0, 0.5);
 	this.lights[1].setConstantAttenuation(0.0);
 	this.lights[1].setLinearAttenuation(0.4);
 	this.lights[1].setQuadraticAttenuation(0.0);
-	this.lights[1].enable();
+	//this.lights[1].enable();
 
 	this.lights[2].setAmbient(0.0, 0.0, 0.0, 1.0);
 	this.lights[2].setDiffuse(1.0, 1.0, 1.0, 0.5);
@@ -171,7 +177,7 @@ LightingScene.prototype.initLights = function() {
 	this.lights[2].setConstantAttenuation(0.0);
 	this.lights[2].setLinearAttenuation(0.4);
 	this.lights[2].setQuadraticAttenuation(0.0);
-	this.lights[2].enable();
+	//this.lights[2].enable();
 
 	this.lights[3].setAmbient(0.0, 0.0, 0.0, 1.0);
 	this.lights[3].setDiffuse(1.0, 1.0, 1.0, 0.5);
@@ -179,12 +185,13 @@ LightingScene.prototype.initLights = function() {
 	this.lights[3].setConstantAttenuation(0.0);
 	this.lights[3].setLinearAttenuation(0.4);
 	this.lights[3].setQuadraticAttenuation(0.0);
-	this.lights[3].enable();
+	//this.lights[3].enable();
 
 	this.lights[0].setVisible(true);
 	this.lights[1].setVisible(true);
 	//this.lights[2].setVisible(true);
 	this.lights[3].setVisible(true);
+
 
 
 	this.shader.unbind();
@@ -485,14 +492,44 @@ this.pushMatrix();
 };
 
 LightingScene.prototype.update = function (currTime) {
-	this.clock.update(currTime);
+	
 	this.paperPlane.update(currTime);
 	this.ball.update(currTime);
+	this.updateBoxLights();
+	if(this.pauseW == false)
+	this.clock.update(currTime);
 };
 
+LightingScene.prototype.updateBoxLights = function (){ 
+	if(this.leftBoardLight == true)
+	{
+	this.lights[0].enable();
+	}
+	else this.lights[0].disable();
 
-LightingScene.prototype.doSomething = function (){ 
-	console.log("Doing something..."); 
+	if(this.rightBoardLight == true)
+	{
+	this.lights[1].enable();
+	}
+	else this.lights[1].disable();
+
+	if(this.centerLight == true)
+	{
+	this.lights[3].enable();
+	}
+	else this.lights[3].disable();
+
+	if(this.windowLight == true)
+	{
+	this.lights[2].enable();
+	}
+	else this.lights[2].disable();
+};
+
+LightingScene.prototype.pauseWatch = function (currTime){ 
+	if(this.pauseW == true) this.pauseW = false;
+	else this.pauseW = true;
+	
 };
 
 LightingScene.prototype.rotateLeft = function (){ 

@@ -17,6 +17,7 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 	this.minT = minT;
 	this.maxT = maxT;
 */
+	var color;
 	this.initBuffers();
 };
 
@@ -75,7 +76,6 @@ MyRobot.prototype.translateBack = function () {
 	this.zOff -= 0.2 * Math.cos(this.angle);
 };
 
-
 MyRobot.prototype.setXZ = function (x, z) {
 	this.xOff = x;
 	this.zOff = z;
@@ -88,4 +88,8 @@ MyRobot.prototype.display = function() {
 	this.scene.rotate(this.angle, 0, 1, 0);
     CGFobject.prototype.display.call(this);
     this.scene.popMatrix();
+};
+
+MyRobot.prototype.setColor = function (color) {
+	this.color = color;
 };
