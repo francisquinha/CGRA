@@ -110,9 +110,10 @@
 
 	}
 
+/*
 	console.log(this.vertices.length/3);
 	console.log(this.texCoords.length/2);
-	
+*/	
 	
 		
  	this.primitiveType = this.scene.gl.TRIANGLES;

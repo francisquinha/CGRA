@@ -17,14 +17,31 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 	this.minT = minT;
 	this.maxT = maxT;
 */
+
+
+	this.faceRobotAppearance = new CGFappearance(this.scene);
+	this.faceRobotAppearance.setAmbient(1, 1, 1, 0.5);
+	this.faceRobotAppearance.setDiffuse(1, 1, 1, 0.2);
+	this.faceRobotAppearance.setSpecular(1, 1, 1, 0.1);
+	this.faceRobotAppearance.setShininess(1);
+	this.faceRobotAppearance.loadTexture('../resources/images/faceRobot.png');
+
+
+// Modelacao do robot
+
+	this.body = new MyClosedCylinder(scene,20,1);
+	this.leftArm = new MyClosedCylinder(scene,20,1);
+	this.rightArm = new MyClosedCylinder(scene,20,1);
+	this.head = new MyLamp(scene,16,8);
+	
 	var color;
 	this.initBuffers();
 };
 
-
 MyRobot.prototype = Object.create(CGFobject.prototype);
 MyRobot.prototype.constructor=MyRobot;
 
+/*
 MyRobot.prototype.initBuffers = function () {
 	this.vertices = [
            0.5, 0.3, 0,
@@ -46,17 +63,17 @@ MyRobot.prototype.initBuffers = function () {
                     ];
 
 
-    /*this.texCoords = [
+    this.texCoords = [
     
 		this.minS, this.maxT,
 		this.maxS, this.maxT,
 		this.minS, this.minT,
 		this.maxS, this.minT
 		];
-*/
+
 	this.initGLBuffers();
 };
-
+*/
 
 MyRobot.prototype.rotateLeft = function () {
 	this.angle += 5*degToRad;
@@ -81,13 +98,37 @@ MyRobot.prototype.setXZ = function (x, z) {
 	this.zOff = z;
 };
 
-
 MyRobot.prototype.display = function() {
-    this.scene.pushMatrix();
+   
     this.scene.translate(this.xOff, this.yOff, this.zOff);
 	this.scene.rotate(this.angle, 0, 1, 0);
-    CGFobject.prototype.display.call(this);
+
+    this.scene.pushMatrix();
+    this.scene.translate(0,0.5,0); // colocar em argumento de myclosedcylinder
+    this.scene.scale(0.3,5,0.3);
+    this.scene.rotate(90*degToRad, 1, 0, 0);
+    this.body.display();
     this.scene.popMatrix();
+
+	this.scene.pushMatrix();
+    this.scene.translate(0,-1,0);
+    this.scene.scale(2,0.1,0.1);
+    this.scene.rotate(90*degToRad, 0, 1, 0);
+    this.leftArm.display();
+    this.scene.popMatrix();
+
+	this.scene.pushMatrix();
+    this.scene.translate(0,-1,0);
+   	this.scene.scale(2,0.1,0.1);
+    this.scene.rotate(-90*degToRad, 0, 1, 0);
+    this.rightArm.display();
+    this.scene.popMatrix();
+
+	this.scene.pushMatrix();
+	this.faceRobotAppearance.apply();
+    this.head.display();
+    this.scene.popMatrix();
+
 };
 
 MyRobot.prototype.setColor = function (color) {
