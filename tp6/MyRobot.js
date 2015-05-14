@@ -11,6 +11,8 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 	this.yOff = yOff;
 	this.zOff = zOff;
 	this.angle = angle * degToRad;
+	this.leftWheelAngle = 0;
+	this.rightWheelAngle = 0;
 	/*
 	this.minS = minS;
 	this.maxS = maxS;
@@ -24,7 +26,8 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 	this.faceRobotAppearance.setDiffuse(1, 1, 1, 0.2);
 	this.faceRobotAppearance.setSpecular(1, 1, 1, 0.1);
 	this.faceRobotAppearance.setShininess(1);
-	this.faceRobotAppearance.loadTexture('../resources/images/faceRobot.png');
+	this.faceRobotAppearance.loadTexture('../resources/images/bender.png');
+	
 
 
 // Modelacao do robot
@@ -32,7 +35,10 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 	this.body = new MyClosedCylinder(scene,20,1);
 	this.leftArm = new MyClosedCylinder(scene,20,1);
 	this.rightArm = new MyClosedCylinder(scene,20,1);
-	this.head = new MyLamp(scene,16,8);
+	this.head = new MySphere(scene, 16, 16);
+	this.leftWheel = new MyWheel(scene, 0);
+	this.rightWheel = new MyWheel(scene, 0);
+	this.axis = new MyClosedCylinder(scene, 20, 1);
 	
 	var color;
 	this.initBuffers();
@@ -77,20 +83,37 @@ MyRobot.prototype.initBuffers = function () {
 
 MyRobot.prototype.rotateLeft = function () {
 	this.angle += 5*degToRad;
+	this.leftWheelAngle += 5*degToRad;
+	this.rightWheelAngle -= 5*degToRad;
+	this.leftWheel.setAngle(this.leftWheelAngle);
+	this.rightWheel.setAngle(this.rightWheelAngle);
 };
 
 MyRobot.prototype.rotateRight = function () {
 	this.angle -= 5*degToRad;
+	this.leftWheelAngle -= 5*degToRad;
+	this.rightWheelAngle += 5*degToRad;
+	this.leftWheel.setAngle(this.leftWheelAngle);
+	this.rightWheel.setAngle(this.rightWheelAngle);
 };
 
 MyRobot.prototype.translateForward = function () {
 	this.xOff += 0.2 * Math.sin(this.angle);
 	this.zOff += 0.2 * Math.cos(this.angle);
+	this.leftWheelAngle += 0.5;
+	this.rightWheelAngle += 0.5;
+	this.leftWheel.setAngle(this.leftWheelAngle);
+	this.rightWheel.setAngle(this.rightWheelAngle);
+
 };
 
 MyRobot.prototype.translateBack = function () {
 	this.xOff -= 0.2 * Math.sin(this.angle);
 	this.zOff -= 0.2 * Math.cos(this.angle);
+	this.leftWheelAngle -= 0.5;
+	this.rightWheelAngle -= 0.5;
+	this.leftWheel.setAngle(this.leftWheelAngle);
+	this.rightWheel.setAngle(this.rightWheelAngle);
 };
 
 MyRobot.prototype.setXZ = function (x, z) {
@@ -104,27 +127,50 @@ MyRobot.prototype.display = function() {
 	this.scene.rotate(this.angle, 0, 1, 0);
 
     this.scene.pushMatrix();
-    this.scene.translate(0,0.5,0); // colocar em argumento de myclosedcylinder
-    this.scene.scale(0.3,5,0.3);
+    this.scene.translate(0,-0.4,0);
+    this.scene.scale(0.2,3.4,0.2);
     this.scene.rotate(90*degToRad, 1, 0, 0);
     this.body.display();
     this.scene.popMatrix();
 
 	this.scene.pushMatrix();
-    this.scene.translate(0,-1,0);
-    this.scene.scale(2,0.1,0.1);
+    this.scene.translate(0,-1.2,0);
     this.scene.rotate(90*degToRad, 0, 1, 0);
+    this.scene.rotate(60*degToRad, 1, 0, 0);
+    this.scene.scale(0.1,0.1,1.6);
     this.leftArm.display();
     this.scene.popMatrix();
 
 	this.scene.pushMatrix();
-    this.scene.translate(0,-1,0);
-   	this.scene.scale(2,0.1,0.1);
+    this.scene.translate(0,-1.2,0);
     this.scene.rotate(-90*degToRad, 0, 1, 0);
+    this.scene.rotate(60*degToRad, 1, 0, 0);
+   	this.scene.scale(0.1,0.1,1.6);
     this.rightArm.display();
     this.scene.popMatrix();
 
+    this.scene.pushMatrix();
+    this.scene.translate(-1.08, -4, 0);
+    this.scene.rotate(90*degToRad, 0, 1, 0);
+    this.scene.scale(0.2,0.2,2.16);
+    this.axis.display();
+    this.scene.popMatrix();
+
+    this.scene.pushMatrix();
+    this.scene.translate(-1, -4, 0);
+    this.scene.scale(0.8,0.8,0.8);
+    this.leftWheel.display();
+    this.scene.popMatrix();
+
+    this.scene.pushMatrix();
+    this.scene.translate(1, -4, 0);
+    this.scene.scale(0.8,0.8,0.8);
+    this.rightWheel.display();
+    this.scene.popMatrix();
+
 	this.scene.pushMatrix();
+	this.scene.scale(0.6, 1, 0.6)
+	this.scene.rotate(90*degToRad, 0, 1, 0);
 	this.faceRobotAppearance.apply();
     this.head.display();
     this.scene.popMatrix();

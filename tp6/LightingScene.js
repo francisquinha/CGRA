@@ -43,7 +43,7 @@ LightingScene.prototype.init = function(application) {
 	// Scene elements
 
 	this.robot = new MyRobot(this, 8.3, 5, 5, -140);
-
+	this.donut = new MyTorus(this, 64, 64, 0.3);
 	this.ball = new MyBall(this, 16, 16);
 	this.lamp = new MyLamp(this, 16, 8);
 	this.cylinder = new MyCylinder(this, 8, 20);
@@ -132,6 +132,7 @@ LightingScene.prototype.init = function(application) {
 	this.ballAppearance.setSpecular(1, 1, 1, 0.6);	
 	this.ballAppearance.setShininess(10);
 	this.ballAppearance.loadTexture('../resources/images/ball.png');
+
 
 	this.setUpdatePeriod(100);
 
@@ -486,7 +487,6 @@ this.pushMatrix();
 		this.materialA.apply();
 		this.robot.display();
 	this.popMatrix();
-
 
 	this.shader.unbind();
 };
