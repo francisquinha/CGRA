@@ -12,12 +12,13 @@ function MyInterface() {
 MyInterface.prototype = Object.create(CGFinterface.prototype);
 MyInterface.prototype.constructor = MyInterface;
 
-
+/*
 var FizzyText = function() {
   this.changeColor = [ 0, 128, 255 ]; // RGB array
-  console.log("pjdopsajpdjpasjpd");
+  this.robotTextures = 'undefined';
+  this.speed = 1;
 };
-
+*/
 
 
 /**
@@ -32,7 +33,7 @@ MyInterface.prototype.init = function(application) {
 	//  http://workshop.chromeexperiments.com/examples/gui
 	
 	this.gui = new dat.GUI();
-	this.text = new FizzyText();
+	//this.text = new FizzyText();
 
 	// add a button:
 	// the first parameter is the object that is being controlled (in this case the scene)
@@ -44,7 +45,20 @@ MyInterface.prototype.init = function(application) {
 	
 	var lights = this.gui.addFolder("Lights");
 	lights.open();
-	
+
+	// Choose from accepted values
+    var appearancesNames = [];
+    for (var propertyName in this.scene.robotAppearanceList) {
+        appearancesNames.push(propertyName);
+    }
+    
+	this.gui.add(this.scene, 'currRobotAppearance', appearancesNames/*this.robotAppearanceList*/).name('Robot texture').onChange(
+		function(value){
+			currRobotAppearance = value;
+			this.object.robot.setTextures(this.object.robotAppearanceList[this.object.currRobotAppearance]);
+		}
+	);
+	        
 	// add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
 	// e.g. this.option1=true; this.option2=false;
 	
@@ -55,16 +69,24 @@ MyInterface.prototype.init = function(application) {
 	
 	// Colors
 		
-	var controller = this.gui.addColor(this.text, 'changeColor').name('Change avatar color').listen();
-	
-
+	this.gui.addColor(this.scene, 'changeColor').name('Robot body color').onChange(
+function(value){
+	changeColor = value;
+	this.object.changeColorRobot(value);
+}
+);
 	// add a slider
 	// must be a numeric variable of the scene, initialized in scene.init e.g.
 	// this.speed=3;
 	// min and max values can be specified as parameters
 	
-	this.gui.add(this.scene, 'speed', -5, 5);
-
+	this.gui.add(this.scene, 'speedRobot', 0, 3).name('Robot speed').onChange(
+		function(value){
+	console.log(value);
+	this.object.changeSpeedRobot(value);
+}
+);
+	
 	return true;
 };
 

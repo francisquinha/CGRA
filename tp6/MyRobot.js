@@ -13,20 +13,18 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 	this.angle = angle * degToRad;
 	this.leftWheelAngle = 0;
 	this.rightWheelAngle = 0;
+	this.leftArmAngle = 0;
+	this.RightArmAngle = 0;
+	this.speedRobot = 0.2;
 	/*
 	this.minS = minS;
 	this.maxS = maxS;
 	this.minT = minT;
 	this.maxT = maxT;
 */
+	
 
 
-	this.faceRobotAppearance = new CGFappearance(this.scene);
-	this.faceRobotAppearance.setAmbient(1, 1, 1, 0.5);
-	this.faceRobotAppearance.setDiffuse(1, 1, 1, 0.2);
-	this.faceRobotAppearance.setSpecular(1, 1, 1, 0.1);
-	this.faceRobotAppearance.setShininess(1);
-	this.faceRobotAppearance.loadTexture('../resources/images/bender.png');
 	
 
 
@@ -40,7 +38,7 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 	this.rightWheel = new MyWheel(scene, 0);
 	this.axis = new MyClosedCylinder(scene, 20, 1);
 	
-	var color;
+	
 	this.initBuffers();
 };
 
@@ -98,22 +96,48 @@ MyRobot.prototype.rotateRight = function () {
 };
 
 MyRobot.prototype.translateForward = function () {
-	this.xOff += 0.2 * Math.sin(this.angle);
-	this.zOff += 0.2 * Math.cos(this.angle);
+	this.xOff += this.speedRobot * Math.sin(this.angle);
+	this.zOff += this.speedRobot * Math.cos(this.angle);
 	this.leftWheelAngle += 0.5;
 	this.rightWheelAngle += 0.5;
 	this.leftWheel.setAngle(this.leftWheelAngle);
 	this.rightWheel.setAngle(this.rightWheelAngle);
+/*
+if(this.leftArmAngle > 60 && this.leftArmAngle >= 0)
+	this.leftArmAngle -= 0.2;
+else if(this.leftArmAngle < -60 && this.leftArmAngle < 0)
+this.leftArmAngle += 0.2;
 
+if(this.rightArmAngle > 60 && this.rightArmAngle > 0)
+	this.rightArmAngle -= 0.2;
+else if(this.rightArmAngle < -60 && this.rightArmAngle <= 0)
+this.rightArmAngle += 0.2;
+
+	this.leftArm.setAngle(this.leftArmAngle, this.xOff, this.yOff, this.zOff);
+	this.rightArm.setAngle(this.rightArmAngle, this.xOff, this.yOff, this.zOff);
+*/
 };
 
 MyRobot.prototype.translateBack = function () {
-	this.xOff -= 0.2 * Math.sin(this.angle);
-	this.zOff -= 0.2 * Math.cos(this.angle);
+	this.xOff -= this.speedRobot * Math.sin(this.angle);
+	this.zOff -= this.speedRobot * Math.cos(this.angle);
 	this.leftWheelAngle -= 0.5;
 	this.rightWheelAngle -= 0.5;
 	this.leftWheel.setAngle(this.leftWheelAngle);
 	this.rightWheel.setAngle(this.rightWheelAngle);
+
+/*	if(this.leftArmAngle > 60 && this.leftArmAngle > 0)
+	this.leftArmAngle -= 0.2;
+else if(this.leftArmAngle < -60 && this.leftArmAngle <= 0)
+this.leftArmAngle += 0.2;
+
+if(this.rightArmAngle > 60 && this.rightArmAngle > 0)
+	this.rightArmAngle -= 0.2;
+else if(this.rightArmAngle < -60 && this.rightArmAngle <= 0)
+this.rightArmAngle += 0.2;
+
+	this.leftArm.setAngle(this.leftArmAngle, this.xOff, this.yOff, this.zOff);
+	this.rightArm.setAngle(this.rightArmAngle, this.xOff, this.yOff, this.zOff);*/
 };
 
 MyRobot.prototype.setXZ = function (x, z) {
@@ -123,9 +147,10 @@ MyRobot.prototype.setXZ = function (x, z) {
 
 MyRobot.prototype.display = function() {
    
-    this.scene.translate(this.xOff, this.yOff, this.zOff);
+   	this.scene.translate(this.xOff, this.yOff, this.zOff);
 	this.scene.rotate(this.angle, 0, 1, 0);
 
+	//this.currAppearanceSet.body.apply();
     this.scene.pushMatrix();
     this.scene.translate(0,-0.4,0);
     this.scene.scale(0.2,3.4,0.2);
@@ -168,15 +193,28 @@ MyRobot.prototype.display = function() {
     this.rightWheel.display();
     this.scene.popMatrix();
 
+	
 	this.scene.pushMatrix();
 	this.scene.scale(0.6, 1, 0.6)
 	this.scene.rotate(90*degToRad, 0, 1, 0);
-	this.faceRobotAppearance.apply();
+	//this.faceRobotAppearance.apply();
+    //this.currAppearanceSet.head.apply();
     this.head.display();
     this.scene.popMatrix();
 
 };
 
-MyRobot.prototype.setColor = function (color) {
-	this.color = color;
+MyRobot.prototype.setColor = function(color) {
+	this.body.setColor(color);
 };
+
+MyRobot.prototype.setSpeed = function(speed) {
+	this.speedRobot = speed;
+};
+
+
+MyRobot.prototype.setTextures = function(appearance) {
+	this.currAppearanceSet = appearance;
+	console.log(appearance);
+};
+

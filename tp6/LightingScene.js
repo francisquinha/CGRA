@@ -1,11 +1,9 @@
 var degToRad = Math.PI / 180.0;
-
 var BOARD_WIDTH = 6.0;
 var BOARD_HEIGHT = 4.0;
-
 var BOARD_A_DIVISIONS = 10;
 var BOARD_B_DIVISIONS = 80;
-
+//var robotAppearanceList = ['Texture1', 'Texture2', 'Texture3'];
 function LightingScene() {
 	CGFscene.call(this);
 }
@@ -19,11 +17,42 @@ LightingScene.prototype.init = function(application) {
 	this.rightBoardLight = true;
 	this.leftBoardLight = true;
 	this.windowLight = true;
-	
-	
+	this.changeColor = [ 0, 128, 255 ]; // RGB array
+	this.speedRobot = 0.2;
 	this.pauseW = false;
 	
-	this.speed=3;
+// Appearances for robotAppearances
+this.currRobotAppearance = 'Texture1';
+this.robotAppearances = [this.faceRobotAppearance, this.boardAppearance, this.cylinderAppearance];
+this.robotAppearanceList = [];
+this.robotAppearanceList['Texture1'] =
+        {
+            head:  this.faceRobotAppearance,
+            //,
+       /*     body: {
+               
+            },
+            arms: {
+                
+                     },
+            wheels: {
+                
+          */  
+        };
+
+ this.robotAppearanceList['Texture2'] =
+        {
+            head: this.robotAppearances.boardAppearance,
+        };
+
+this.robotAppearanceList['Texture3'] =
+        {
+            head: this.robotAppearances.cylinderAppearance,
+        };
+
+
+//////////////////////////////////////////////////
+/////////////////////////////////
 
 	this.initCameras();
 
@@ -132,6 +161,14 @@ LightingScene.prototype.init = function(application) {
 	this.ballAppearance.setSpecular(1, 1, 1, 0.6);	
 	this.ballAppearance.setShininess(10);
 	this.ballAppearance.loadTexture('../resources/images/ball.png');
+
+	this.faceRobotAppearance = new CGFappearance(this);
+	this.faceRobotAppearance.setAmbient(1, 1, 1, 0.5);
+	this.faceRobotAppearance.setDiffuse(1, 1, 1, 0.2);
+	this.faceRobotAppearance.setSpecular(1, 1, 1, 0.1);
+	this.faceRobotAppearance.setShininess(1);
+	this.faceRobotAppearance.loadTexture('../resources/images/bender.png');
+
 
 
 	this.setUpdatePeriod(100);
@@ -502,27 +539,19 @@ LightingScene.prototype.update = function (currTime) {
 
 LightingScene.prototype.updateBoxLights = function (){ 
 	if(this.leftBoardLight == true)
-	{
 	this.lights[0].enable();
-	}
 	else this.lights[0].disable();
 
 	if(this.rightBoardLight == true)
-	{
 	this.lights[1].enable();
-	}
 	else this.lights[1].disable();
 
 	if(this.centerLight == true)
-	{
 	this.lights[3].enable();
-	}
 	else this.lights[3].disable();
 
 	if(this.windowLight == true)
-	{
 	this.lights[2].enable();
-	}
 	else this.lights[2].disable();
 };
 
@@ -549,4 +578,21 @@ LightingScene.prototype.translateForward = function (){
 
 LightingScene.prototype.translateBack = function (){ 
 	this.robot.translateBack();
+};
+
+
+LightingScene.prototype.changeTextures = function (currRobotAppearance){ 
+	this.robot.setTextures(this.robotAppearanceList[currRobotAppearance]);
+};
+
+
+LightingScene.prototype.changeColorRobot = function(changeColor){ 
+	this.changeColor = changeColor;
+	this.robot.setColor(changeColor);
+};
+
+
+LightingScene.prototype.changeSpeedRobot = function(speed){ 
+	this.speedRobot = speed;
+	this.robot.setSpeed(this.speedRobot);
 };
