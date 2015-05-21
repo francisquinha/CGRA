@@ -3,7 +3,7 @@ var BOARD_WIDTH = 6.0;
 var BOARD_HEIGHT = 4.0;
 var BOARD_A_DIVISIONS = 10;
 var BOARD_B_DIVISIONS = 80;
-//var robotAppearanceList = ['Texture1', 'Texture2', 'Texture3'];
+
 function LightingScene() {
 	CGFscene.call(this);
 }
@@ -22,33 +22,9 @@ LightingScene.prototype.init = function(application) {
 	this.pauseW = false;
 	
 // Appearances for robotAppearances
-this.currRobotAppearance = 'Texture1';
-this.robotAppearances = [this.faceRobotAppearance, this.boardAppearance, this.cylinderAppearance];
-this.robotAppearanceList = [];
-this.robotAppearanceList['Texture1'] =
-        {
-            head:  this.faceRobotAppearance,
-            //,
-       /*     body: {
-               
-            },
-            arms: {
-                
-                     },
-            wheels: {
-                
-          */  
-        };
+this.currRobotAppearance = 0;
+this.robotAppearances = [];
 
- this.robotAppearanceList['Texture2'] =
-        {
-            head: this.robotAppearances.boardAppearance,
-        };
-
-this.robotAppearanceList['Texture3'] =
-        {
-            head: this.robotAppearances.cylinderAppearance,
-        };
 
 
 //////////////////////////////////////////////////
@@ -169,6 +145,23 @@ this.robotAppearanceList['Texture3'] =
 	this.faceRobotAppearance.setShininess(1);
 	this.faceRobotAppearance.loadTexture('../resources/images/bender.png');
 
+this.robotAppearances[0] =
+        {
+            head: this.faceRobotAppearance,
+            wheel: this.boardAppearance
+        }
+
+ this.robotAppearances[1] =
+        {
+            head: this.materialB,
+            wheel: this.materialF
+        };
+
+this.robotAppearances[2] =
+        {
+            head: this.floorAppearance,
+            wheel: this.windowAppearance
+        };
 
 
 	this.setUpdatePeriod(100);
@@ -582,7 +575,7 @@ LightingScene.prototype.translateBack = function (){
 
 
 LightingScene.prototype.changeTextures = function (currRobotAppearance){ 
-	this.robot.setTextures(this.robotAppearanceList[currRobotAppearance]);
+	this.robot.setTextures(this.robotAppearances[this.currRobotAppearance]);
 };
 
 

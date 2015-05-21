@@ -8,8 +8,6 @@
 function MyWheel(scene, angle) {
 	CGFobject.call(this,scene);
 	this.angle = angle;
-
-
 	this.wheelAppearance = new CGFappearance(this.scene);
 	this.wheelAppearance.setAmbient(1, 1, 1, 1);
 	this.wheelAppearance.setDiffuse(1, 1, 1, 1);
@@ -17,6 +15,7 @@ function MyWheel(scene, angle) {
 	this.wheelAppearance.setShininess(10);
 	this.wheelAppearance.loadTexture('../resources/images/pattern1.png');
 
+	this.wheelNewAppearance = this.wheelAppearance;
 	this.tire = new MyTorus(scene, 16, 16, 0.3);
 	this.rim1 = new MyClosedCylinder(scene,16,1);
 	this.rim2 = new MyClosedCylinder(scene,16,1);
@@ -50,7 +49,7 @@ MyWheel.prototype.display = function() {
 
     this.scene.pushMatrix();
     this.scene.rotate(-90*degToRad, 0, 1, 0);
-    this.wheelAppearance.apply();
+    this.wheelNewAppearance.apply();
     this.tire.display();
     this.scene.popMatrix();
 
@@ -59,4 +58,8 @@ MyWheel.prototype.display = function() {
 
 MyWheel.prototype.setAngle = function (angle) {
 	this.angle = angle;
+};
+
+MyWheel.prototype.setAppearance = function (appearance) {
+	this.wheelNewAppearance = appearance;
 };

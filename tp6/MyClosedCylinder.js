@@ -4,7 +4,6 @@
  */
  function MyClosedCylinder(scene, slices, stacks, angle, xOff, yOff, zOff) {
 	CGFobject.call(this,scene);
-	
 	this.slices=slices;
 	this.stacks=stacks;
 	this.angle = 0;
@@ -24,6 +23,8 @@
 	this.defaultRobotAppearance.setDiffuse(this.actualColor[0], this.actualColor[1], this.actualColor[2], 0.2);
 	this.defaultRobotAppearance.setSpecular(this.actualColor[0], this.actualColor[1], this.actualColor[2], 0.1);
 	this.defaultRobotAppearance.setShininess(1);
+
+	//this.defaultApperance = 'undefined';//this.defaultRobotAppearance;
 
 	this.materialC = new CGFappearance(this.scene);
 	this.materialC.setAmbient(1, 1, 1, 0.8);
@@ -56,8 +57,8 @@
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
-    this.defaultRobotAppearance.apply();
-	this.corpo.display();
+   	this.defaultRobotAppearance.apply();
+  	this.corpo.display();
 	this.scene.popMatrix();
 };
 

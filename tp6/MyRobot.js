@@ -16,6 +16,8 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 	this.leftArmAngle = 0;
 	this.RightArmAngle = 0;
 	this.speedRobot = 0.2;
+
+	this.currAppearanceSet = 'undefined';
 	/*
 	this.minS = minS;
 	this.maxS = maxS;
@@ -23,12 +25,7 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 	this.maxT = maxT;
 */
 	
-
-
-	
-
-
-// Modelacao do robot
+	// Modelacao do robot
 
 	this.body = new MyClosedCylinder(scene,20,1);
 	this.leftArm = new MyClosedCylinder(scene,20,1);
@@ -37,7 +34,6 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 	this.leftWheel = new MyWheel(scene, 0);
 	this.rightWheel = new MyWheel(scene, 0);
 	this.axis = new MyClosedCylinder(scene, 20, 1);
-	
 	
 	this.initBuffers();
 };
@@ -150,7 +146,6 @@ MyRobot.prototype.display = function() {
    	this.scene.translate(this.xOff, this.yOff, this.zOff);
 	this.scene.rotate(this.angle, 0, 1, 0);
 
-	//this.currAppearanceSet.body.apply();
     this.scene.pushMatrix();
     this.scene.translate(0,-0.4,0);
     this.scene.scale(0.2,3.4,0.2);
@@ -197,11 +192,11 @@ MyRobot.prototype.display = function() {
 	this.scene.pushMatrix();
 	this.scene.scale(0.6, 1, 0.6)
 	this.scene.rotate(90*degToRad, 0, 1, 0);
-	//this.faceRobotAppearance.apply();
-    //this.currAppearanceSet.head.apply();
+
+	if(this.currAppearanceSet != 'undefined')
+    	this.currAppearanceSet.head.apply();
     this.head.display();
     this.scene.popMatrix();
-
 };
 
 MyRobot.prototype.setColor = function(color) {
@@ -212,9 +207,8 @@ MyRobot.prototype.setSpeed = function(speed) {
 	this.speedRobot = speed;
 };
 
-
 MyRobot.prototype.setTextures = function(appearance) {
 	this.currAppearanceSet = appearance;
-	console.log(appearance);
+	this.rightWheel.setAppearance(this.currAppearanceSet.wheel);
+	this.leftWheel.setAppearance(this.currAppearanceSet.wheel);
 };
-

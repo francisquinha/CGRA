@@ -47,15 +47,16 @@ MyInterface.prototype.init = function(application) {
 	lights.open();
 
 	// Choose from accepted values
-    var appearancesNames = [];
+/*    var appearancesNames = [];
     for (var propertyName in this.scene.robotAppearanceList) {
         appearancesNames.push(propertyName);
     }
-    
-	this.gui.add(this.scene, 'currRobotAppearance', appearancesNames/*this.robotAppearanceList*/).name('Robot texture').onChange(
+*/      
+	this.gui.add(this.scene, 'currRobotAppearance', { Texture1: 0, Texture2: 1, Texture3: 2 }).name('Robot texture').onChange(
 		function(value){
 			currRobotAppearance = value;
-			this.object.robot.setTextures(this.object.robotAppearanceList[this.object.currRobotAppearance]);
+// ir a cena ou chamar robot diretamente daqui?
+			this.object.changeTextures(value);
 		}
 	);
 	        
