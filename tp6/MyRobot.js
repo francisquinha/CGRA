@@ -94,8 +94,8 @@ MyRobot.prototype.rotateRight = function () {
 MyRobot.prototype.translateForward = function () {
 	this.xOff += this.speedRobot * Math.sin(this.angle);
 	this.zOff += this.speedRobot * Math.cos(this.angle);
-	this.leftWheelAngle += 0.5;
-	this.rightWheelAngle += 0.5;
+	this.leftWheelAngle += 2.5 * this.speedRobot;
+	this.rightWheelAngle += 2.5 * this.speedRobot;
 	this.leftWheel.setAngle(this.leftWheelAngle);
 	this.rightWheel.setAngle(this.rightWheelAngle);
 /*
@@ -117,8 +117,8 @@ this.rightArmAngle += 0.2;
 MyRobot.prototype.translateBack = function () {
 	this.xOff -= this.speedRobot * Math.sin(this.angle);
 	this.zOff -= this.speedRobot * Math.cos(this.angle);
-	this.leftWheelAngle -= 0.5;
-	this.rightWheelAngle -= 0.5;
+	this.leftWheelAngle -= 2.5 * this.speedRobot;
+	this.rightWheelAngle -= 2.5 * this.speedRobot;
 	this.leftWheel.setAngle(this.leftWheelAngle);
 	this.rightWheel.setAngle(this.rightWheelAngle);
 
