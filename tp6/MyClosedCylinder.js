@@ -16,7 +16,7 @@
 	this.topo1.initBuffers();
 	this.topo2 = new MyCircle(scene, this.slices);
 	this.topo2.initBuffers();
-	
+/*	
 	this.actualColor = [1, 1, 1];
 	this.defaultRobotAppearance = new CGFappearance(this.scene);
 	this.defaultRobotAppearance.setAmbient(this.actualColor[0], this.actualColor[1], this.actualColor[2], 0.5);
@@ -31,7 +31,7 @@
 	this.materialC.setDiffuse(1, 1, 1, 0.8);
 	this.materialC.setSpecular(1, 1, 1, 0.6);	
 	this.materialC.setShininess(10);
-/*
+
     var currentTime = Date.now();
 	this.milisegundos = 0;
 */
@@ -46,18 +46,18 @@
 
     this.scene.pushMatrix();
     this.scene.translate(0, 0, 1);
-    this.materialC.apply();
+//    this.materialC.apply();
     this.topo1.display();
     this.scene.popMatrix();
 
 	this.scene.pushMatrix();
     this.scene.scale(-1,1,1);
-    this.materialC.apply();
+//    this.materialC.apply();
     this.topo2.display();
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
-   	this.defaultRobotAppearance.apply();
+//   	this.defaultRobotAppearance.apply();
   	this.corpo.display();
 	this.scene.popMatrix();
 };
@@ -76,7 +76,7 @@ MyClosedCylinder.prototype.setAngle = function (angle, xOff, yOff, zOff) {
 	this.yOff = yOff;
 	this.zOff = zOff;
 };
-
+/*
 MyClosedCylinder.prototype.setColor = function(color) {
 	this.actualColor[0] = color[0]/256;	
 	this.actualColor[1] = color[1]/256;	
@@ -86,3 +86,4 @@ MyClosedCylinder.prototype.setColor = function(color) {
 	this.defaultRobotAppearance.setDiffuse(this.actualColor[0], this.actualColor[1], this.actualColor[2], 0.2);
 	this.defaultRobotAppearance.setSpecular(this.actualColor[0], this.actualColor[1], this.actualColor[2], 0.1);
 };
+*/

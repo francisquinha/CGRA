@@ -148,21 +148,26 @@ this.robotAppearances = [];
 this.robotAppearances[0] =
         {
             head: this.faceRobotAppearance,
-            wheel: this.boardAppearance
+            wheel: this.boardAppearance,
+            arm: this.boardAppearance,
+            body: this.boardAppearance
         }
 
  this.robotAppearances[1] =
         {
             head: this.materialB,
-            wheel: this.materialF
+            wheel: this.materialF,
+            arm: this.materialF,
+            body: this.materialF
         };
 
 this.robotAppearances[2] =
         {
             head: this.floorAppearance,
-            wheel: this.windowAppearance
+            wheel: this.windowAppearance,
+            arm: this.windowAppearance,
+            body: this.windowAppearance
         };
-
 
 	this.setUpdatePeriod(100);
 
@@ -293,7 +298,7 @@ LightingScene.prototype.display = function() {
 		this.materialW.apply();
 		this.wall.display();
 	this.popMatrix();
-
+/*
 	// First Table
 	this.pushMatrix();
 		this.translate(5, 0, 8);
@@ -398,7 +403,7 @@ LightingScene.prototype.display = function() {
 		this.cylinderAppearance.apply();
 		this.cylinder.display();
 	this.popMatrix();
-
+*/
 	//candeeiros
 	this.pushMatrix();
 		this.translate(4.5, 6.0, 4.0);

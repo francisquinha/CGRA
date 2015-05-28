@@ -16,10 +16,10 @@ function MyWheel(scene, angle) {
 	this.wheelAppearance.loadTexture('../resources/images/pattern1.png');
 
 	this.wheelNewAppearance = this.wheelAppearance;
-	this.tire = new MyTorus(scene, 16, 16, 0.3);
-	this.rim1 = new MyClosedCylinder(scene,16,1);
-	this.rim2 = new MyClosedCylinder(scene,16,1);
-	this.rim3 = new MyClosedCylinder(scene, 16, 1);
+	this.tire = new MyTorus(scene, 32, 32, 0.3);
+	this.rim1 = new MyClosedCylinder(scene, 32, 1);
+	this.rim2 = new MyClosedCylinder(scene, 32, 1);
+	this.rim3 = new MyClosedCylinder(scene, 32, 1);
 	this.initBuffers();
 };
 

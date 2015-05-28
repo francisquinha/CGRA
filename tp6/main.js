@@ -25,6 +25,9 @@ serialInclude([
 	'MyTorus.js',
 	'MyWheel.js',
 	'MySphere.js',
+	'MyArm.js',
+	'MyHead.js',
+	'MyBody.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
