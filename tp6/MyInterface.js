@@ -52,7 +52,7 @@ MyInterface.prototype.init = function(application) {
         appearancesNames.push(propertyName);
     }
 */      
-	this.gui.add(this.scene, 'currRobotAppearance', { Texture1: 0, Texture2: 1, Texture3: 2 }).name('Robot texture').onChange(
+	this.gui.add(this.scene, 'currRobotAppearance', { Robot1: 0, Robot2: 1, Robot3: 2, Robot4: 3}).name('Robot').onChange(
 		function(value){
 			currRobotAppearance = value;
 // ir a cena ou chamar robot diretamente daqui?

@@ -17,7 +17,6 @@
 	this.topo2 = new MyCircle(scene, this.slices);
 	this.topo2.initBuffers();
 /*	
-	this.actualColor = [1, 1, 1];
 	this.defaultRobotAppearance = new CGFappearance(this.scene);
 	this.defaultRobotAppearance.setAmbient(this.actualColor[0], this.actualColor[1], this.actualColor[2], 0.5);
 	this.defaultRobotAppearance.setDiffuse(this.actualColor[0], this.actualColor[1], this.actualColor[2], 0.2);
@@ -77,13 +76,4 @@ MyClosedCylinder.prototype.setAngle = function (angle, xOff, yOff, zOff) {
 	this.zOff = zOff;
 };
 /*
-MyClosedCylinder.prototype.setColor = function(color) {
-	this.actualColor[0] = color[0]/256;	
-	this.actualColor[1] = color[1]/256;	
-	this.actualColor[2] = color[2]/256;
-
-	this.defaultRobotAppearance.setAmbient(this.actualColor[0], this.actualColor[1], this.actualColor[2], 0.5);
-	this.defaultRobotAppearance.setDiffuse(this.actualColor[0], this.actualColor[1], this.actualColor[2], 0.2);
-	this.defaultRobotAppearance.setSpecular(this.actualColor[0], this.actualColor[1], this.actualColor[2], 0.1);
-};
 */

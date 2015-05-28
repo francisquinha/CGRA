@@ -5,17 +5,11 @@
  */
 
 //MyArm e uma subclasse de CGFobject
-function MyArm(scene, angle) {
+function MyArm(scene, angle, appearance) {
 	CGFobject.call(this,scene);
 	this.angle = angle;
-	this.armAppearance = new CGFappearance(this.scene);
-	this.armAppearance.setAmbient(1, 1, 1, 1);
-	this.armAppearance.setDiffuse(1, 1, 1, 1);
-	this.armAppearance.setSpecular(1, 1, 1, 1);	
-	this.armAppearance.setShininess(10);
-	this.armAppearance.loadTexture('../resources/images/pattern1.png');
 
-	this.armNewAppearance = this.armAppearance;
+	this.armNewAppearance = appearance;
 	this.middle = new MyCylinder(scene, 16, 8);
 	this.top = new MyLamp(scene, 16, 8);
 	this.bottom = new MyLamp(scene, 16, 8);
@@ -27,6 +21,7 @@ MyArm.prototype.constructor=MyArm;
 
 MyArm.prototype.display = function() {
    
+	this.armNewAppearance.apply();
     this.scene.rotate(this.angle, 1, 0, 0);
 
     this.scene.pushMatrix();
@@ -44,7 +39,6 @@ MyArm.prototype.display = function() {
 	this.scene.pushMatrix();
 	this.scene.rotate(-90*degToRad, 1, 0, 0);
     this.scene.scale(0.2,0.2,0.2)
-	this.armNewAppearance.apply();
     this.bottom.display();
     this.scene.popMatrix();
 

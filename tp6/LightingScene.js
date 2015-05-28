@@ -21,10 +21,8 @@ LightingScene.prototype.init = function(application) {
 	this.speedRobot = 0.2;
 	this.pauseW = false;
 	
-// Appearances for robotAppearances
-this.currRobotAppearance = 0;
-this.robotAppearances = [];
 
+	this.currRobotAppearance = 0;
 
 
 //////////////////////////////////////////////////
@@ -138,38 +136,7 @@ this.robotAppearances = [];
 	this.ballAppearance.setShininess(10);
 	this.ballAppearance.loadTexture('../resources/images/ball.png');
 
-	this.faceRobotAppearance = new CGFappearance(this);
-	this.faceRobotAppearance.setAmbient(1, 1, 1, 0.5);
-	this.faceRobotAppearance.setDiffuse(1, 1, 1, 0.2);
-	this.faceRobotAppearance.setSpecular(1, 1, 1, 0.1);
-	this.faceRobotAppearance.setShininess(1);
-	this.faceRobotAppearance.loadTexture('../resources/images/bender.png');
-
-this.robotAppearances[0] =
-        {
-            head: this.faceRobotAppearance,
-            wheel: this.boardAppearance,
-            arm: this.boardAppearance,
-            body: this.boardAppearance
-        }
-
- this.robotAppearances[1] =
-        {
-            head: this.materialB,
-            wheel: this.materialF,
-            arm: this.materialF,
-            body: this.materialF
-        };
-
-this.robotAppearances[2] =
-        {
-            head: this.floorAppearance,
-            wheel: this.windowAppearance,
-            arm: this.windowAppearance,
-            body: this.windowAppearance
-        };
-
-	this.setUpdatePeriod(100);
+this.setUpdatePeriod(100);
 
 };
 
@@ -298,7 +265,7 @@ LightingScene.prototype.display = function() {
 		this.materialW.apply();
 		this.wall.display();
 	this.popMatrix();
-/*
+
 	// First Table
 	this.pushMatrix();
 		this.translate(5, 0, 8);
@@ -403,7 +370,7 @@ LightingScene.prototype.display = function() {
 		this.cylinderAppearance.apply();
 		this.cylinder.display();
 	this.popMatrix();
-*/
+
 	//candeeiros
 	this.pushMatrix();
 		this.translate(4.5, 6.0, 4.0);
@@ -423,19 +390,6 @@ LightingScene.prototype.display = function() {
 		this.lamp.display();
 	this.popMatrix();
 
-/**	this.pushMatrix();
-		this.translate(12, 6.0, 9.0);
-		this.materialF.apply();
-		this.lamp.display();
-	this.popMatrix();
-*/
-/**	this.pushMatrix();
-		this.translate(4.5, 6.0, 9.0);
-		this.materialF.apply();
-		this.lamp.display();
-	this.popMatrix();
-*/
-
 // suportes candeeiro
 
 	this.pushMatrix();
@@ -446,14 +400,6 @@ LightingScene.prototype.display = function() {
 		this.cylinder.display();
 	this.popMatrix();
 
-/**	this.pushMatrix();
-		this.translate(4.5, 6.9, 9);
-		this.scale(0.1, 1.1, 0.1)
-		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.materialF.apply();
-		this.cylinder.display();
-	this.popMatrix();
-*/
 	this.pushMatrix();
 		this.translate(12, 6.9, 4);
 		this.scale(0.1, 1.1, 0.1)
@@ -461,22 +407,13 @@ LightingScene.prototype.display = function() {
 		this.cylinderAppearance.apply();
 		this.cylinder.display();
 	this.popMatrix();
-
-/**	this.pushMatrix();
-		this.translate(12, 6.9, 9);
-		this.scale(0.1, 1.1, 0.1)
-		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.materialF.apply();
-		this.cylinder.display();
-	this.popMatrix();
-*/
 	
 	this.pushMatrix();
-	this.translate(8.25, 6.9, 14);
-	this.scale(0.1, 1.1, 0.1)
-	this.rotate(-90 * degToRad, 1, 0, 0);
-	this.cylinderAppearance.apply();
-	this.cylinder.display();
+		this.translate(8.25, 6.9, 14);
+		this.scale(0.1, 1.1, 0.1)
+		this.rotate(-90 * degToRad, 1, 0, 0);
+		this.cylinderAppearance.apply();
+		this.cylinder.display();
 	this.popMatrix();
 
 // globo
@@ -500,7 +437,7 @@ LightingScene.prototype.display = function() {
 		this.ball.display();
 	this.popMatrix();
 
-	//clock
+//clock
 	this.pushMatrix();
 		this.translate(7.25, 7.2, 0);
 		this.scale(0.7, 0.7, 0.2)
@@ -513,17 +450,18 @@ LightingScene.prototype.display = function() {
 		this.materialB.apply();
 		this.paperPlane.display();
 	this.popMatrix();
-	// ---- END Primitive drawing section
-
 
 //robot
-
-this.pushMatrix();
+	this.pushMatrix();
 		this.materialA.apply();
 		this.robot.display();
 	this.popMatrix();
 
+// ---- END Primitive drawing section
+
 	this.shader.unbind();
+
+
 };
 
 LightingScene.prototype.update = function (currTime) {
@@ -580,7 +518,8 @@ LightingScene.prototype.translateBack = function (){
 
 
 LightingScene.prototype.changeTextures = function (currRobotAppearance){ 
-	this.robot.setTextures(this.robotAppearances[this.currRobotAppearance]);
+	this.robot.setTextures(currRobotAppearance);
+	console.log(currRobotAppearance);
 };
 
 
