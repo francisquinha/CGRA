@@ -225,12 +225,14 @@ MyRobot.prototype.translateForward = function () {
 	this.leftWheel.setAngle(this.leftWheelAngle);
 	this.rightWheel.setAngle(this.rightWheelAngle);
 	
+	if (this.forward == 0) this.going = 1 - this.going;
 	this.forward = 1;
 	if (this.rightArmAngle >= 1 || this.rightArmAngle <= -1) this.going = 1 - this.going;
-	if (this.going == 1) this.rightArmAngle -= this.speedRobot;
+
+	if ((this.going == 1 && this.rightArmAngle > -1) || this.rightArmAngle >= 1) this.rightArmAngle -= this.speedRobot;
 	else this.rightArmAngle += this.speedRobot;
 
-	if (this.going == 1) this.leftArmAngle += this.speedRobot;
+	if ((this.going == 1 && this.leftArmAngle < 1) || this.leftArmAngle <= -1) this.leftArmAngle += this.speedRobot;
 	else this.leftArmAngle -= this.speedRobot;
 
 	this.leftArm.setAngle(this.leftArmAngle);
@@ -249,10 +251,11 @@ MyRobot.prototype.translateBack = function () {
 	if (this.forward == 1) this.going = 1 - this.going;
 	this.forward = 0;
 	if (this.rightArmAngle >= 1 || this.rightArmAngle <= -1) this.going = 1 - this.going;
-	if (this.going == 1) this.rightArmAngle -= this.speedRobot;
+	
+	if ((this.going == 1 && this.rightArmAngle > -1) || this.rightArmAngle >= 1) this.rightArmAngle -= this.speedRobot;
 	else this.rightArmAngle += this.speedRobot;
 
-	if (this.going == 1) this.leftArmAngle += this.speedRobot;
+	if ((this.going == 1 && this.leftArmAngle < 1) || this.leftArmAngle <= -1) this.leftArmAngle += this.speedRobot;
 	else this.leftArmAngle -= this.speedRobot;
 
 	this.leftArm.setAngle(this.leftArmAngle);
