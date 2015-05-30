@@ -1,8 +1,8 @@
 var degToRad = Math.PI / 180.0;
 var BOARD_WIDTH = 6.0;
 var BOARD_HEIGHT = 4.0;
-var BOARD_A_DIVISIONS = 10;
-var BOARD_B_DIVISIONS = 80;
+var BOARD_A_DIVISIONS = 5;
+var BOARD_B_DIVISIONS = 10;
 
 function LightingScene() {
 	CGFscene.call(this);
@@ -45,13 +45,12 @@ LightingScene.prototype.init = function(application) {
 	// Scene elements
 
 	this.robot = new MyRobot(this, 8.3, 5, 5, -140);
-	this.donut = new MyTorus(this, 64, 64, 0.3);
-	this.ball = new MyBall(this, 16, 16);
-	this.lamp = new MyLamp(this, 16, 8);
-	this.cylinder = new MyCylinder(this, 8, 20);
+	this.ball = new MyBall(this, 8, 8);
+	this.lamp = new MyLamp(this, 8, 4);
+	this.cylinder = new MyCylinder(this, 8, 8);
 	this.table = new MyTable(this);
 	this.chair = new MyChair(this);
-	this.clock = new MyClock(this, 12, 4);
+	this.clock = new MyClock(this, 12, 2);
 	this.paperPlane = new MyPaperPlane(this, 12, 4.4, 10, -0.003, 0.0002, -0.004, 0.0004);
 	
 
@@ -145,7 +144,7 @@ LightingScene.prototype.init = function(application) {
 	this.planeWindowAppearance.setDiffuse(1, 1, 1, 0.4);
 	this.planeWindowAppearance.setSpecular(1, 1, 1, 1);	
 	this.planeWindowAppearance.setShininess(120);
-	this.planeWindowAppearance.loadTexture('../resources/images/imageWindow.jpg');
+	this.planeWindowAppearance.loadTexture('../resources/images/imageWindow.png');
 
 
 this.setUpdatePeriod(100);
@@ -295,7 +294,7 @@ LightingScene.prototype.display = function() {
 		this.materialW.apply();
 		this.wall.display();
 	this.popMatrix();
-
+/*
 	// First Table
 	this.pushMatrix();
 		this.translate(5, 0, 8);
@@ -445,7 +444,7 @@ LightingScene.prototype.display = function() {
 		this.cylinderAppearance.apply();
 		this.cylinder.display();
 	this.popMatrix();
-
+*/
 // globo
 	this.pushMatrix();
 		this.translate(13.5, 0, 1.5);
@@ -548,7 +547,7 @@ LightingScene.prototype.translateBack = function (){
 
 LightingScene.prototype.changeTextures = function (currRobotAppearance){ 
 	this.robot.setTextures(currRobotAppearance);
-	console.log(currRobotAppearance);
+//	console.log(currRobotAppearance);
 };
 
 
@@ -566,6 +565,10 @@ LightingScene.prototype.changeSpeedRobot = function(speed){
 LightingScene.prototype.helloArm = function (){ 
 	this.robot.helloArm();
 };
+
+LightingScene.prototype.removeAngles = function() {
+	this.robot.removeAngles();
+}
 
 LightingScene.prototype.openWindow = function (){ 
 	if(this.openW == true) 

@@ -10,7 +10,7 @@ function MyArm(scene, angle, appearance) {
 	
 	this.angle = angle;
 	this.helloAngle = 0;
-	
+	this.direction = 1;
 
 	this.armNewAppearance = appearance;
 	this.middle = new MyCylinder(scene, 16, 8);
@@ -29,7 +29,6 @@ MyArm.prototype.display = function() {
     this.scene.rotate(this.angle, 1, 0, 0);
     
    	this.scene.rotate(this.helloAngle, 0, 1, 0);
-	
 	
     this.scene.pushMatrix();
     this.scene.scale(0.2,0.2,1.4)
@@ -59,10 +58,12 @@ MyArm.prototype.setAppearance = function (appearance) {
 	this.armNewAppearance = appearance;
 };
 
-
-
 MyArm.prototype.setHelloAngle = function (angle) {
-	this.helloAngle -= angle;
-	if(this.helloAngle/degToRad <= -30)
+	if (this.helloAngle <= -0.6 || this.helloAngle >= 0) this.direction = 1 - this.direction;
+	if (this.direction == 1) this.helloAngle += angle;
+	else this.helloAngle -= angle;
+};
+
+MyArm.prototype.resetHello = function() {
 	this.helloAngle = 0;
 };

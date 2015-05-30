@@ -19,6 +19,7 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 	this.forward = 1;
 	this.speedRobot = 0.2;
 	this.actualColor = [1, 1, 1];
+	this.hello = 0;
 	
 	this.faceEva = new CGFappearance(this.scene);
 	this.faceEva.setAmbient(1, 1, 1, 0.5);
@@ -149,7 +150,7 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 	this.body = new MyBody(scene, this.bodyBender, this.bodyBender);
 	this.leftArm = new MyArm(scene, 0, this.bodyBender);
 	this.rightArm = new MyArm(scene, 0, this.bodyBender);
-	this.head = new MyLamp(scene, 32, 16);
+	this.head = new MyLamp(scene, 8, 4);
 	this.leftWheel = new MyWheel(scene, 0, this.wheelBender, this.bodyBender);
 	this.rightWheel = new MyWheel(scene, 0, this.wheelBender, this.bodyBender);
 	
@@ -229,8 +230,10 @@ MyRobot.prototype.translateForward = function () {
 	this.forward = 1;
 	if (this.rightArmAngle >= 1 || this.rightArmAngle <= -1) this.going = 1 - this.going;
 
-	if ((this.going == 1 && this.rightArmAngle > -1) || this.rightArmAngle >= 1) this.rightArmAngle -= this.speedRobot;
-	else this.rightArmAngle += this.speedRobot;
+	if (this.hello == 0) {
+		if ((this.going == 1 && this.rightArmAngle > -1) || this.rightArmAngle >= 1) this.rightArmAngle -= this.speedRobot;
+		else this.rightArmAngle += this.speedRobot;
+	}
 
 	if ((this.going == 1 && this.leftArmAngle < 1) || this.leftArmAngle <= -1) this.leftArmAngle += this.speedRobot;
 	else this.leftArmAngle -= this.speedRobot;
@@ -252,8 +255,10 @@ MyRobot.prototype.translateBack = function () {
 	this.forward = 0;
 	if (this.rightArmAngle >= 1 || this.rightArmAngle <= -1) this.going = 1 - this.going;
 	
-	if ((this.going == 1 && this.rightArmAngle > -1) || this.rightArmAngle >= 1) this.rightArmAngle -= this.speedRobot;
-	else this.rightArmAngle += this.speedRobot;
+	if (this.hello == 0) {
+		if ((this.going == 1 && this.rightArmAngle > -1) || this.rightArmAngle >= 1) this.rightArmAngle -= this.speedRobot;
+		else this.rightArmAngle += this.speedRobot;
+	}
 
 	if ((this.going == 1 && this.leftArmAngle < 1) || this.leftArmAngle <= -1) this.leftArmAngle += this.speedRobot;
 	else this.leftArmAngle -= this.speedRobot;
@@ -339,8 +344,26 @@ MyRobot.prototype.setColor = function(color) {
 	this.rightWheel.setColor(color);
 };
 
-MyRobot.prototype.helloArm = function() {
-this.leftArm.setAngle(180 * degToRad);
-this.leftArm.setHelloAngle(5 * degToRad);
+MyRobot.prototype.stopInterval = function(inter) {
+	clearInterval(inter);
+	this.leftArm.resetHello();
+	this.hello = 0;
 };
 
+var inter;
+function stopInterval(arm, angle) {
+	clearInterval(inter);
+	arm.resetHello();
+	arm.setAngle(angle);
+	
+};
+
+MyRobot.prototype.helloArm = function() {
+	this.hello = 1;
+	this.leftArm.setAngle(180 * degToRad);
+	var count = 0;
+	var a = this.leftArm;
+	var b = this.leftArmAngle;
+	var intervalo = setInterval(function(){a.setHelloAngle(0.1); count++; if (count == 40) stopInterval(a, b);}, 50);
+	inter = intervalo;
+};

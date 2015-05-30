@@ -74,12 +74,12 @@ MyInterface.prototype.init = function(application) {
 	lights.add(this.scene, 'windowLight').name('Window light');
 	
 	// Colors
-		
+	/*	
 	this.gui.addColor(this.scene, 'changeColor').name('Robot body color').listen().onChange(function(value){
 	changeColor = value;
-	this.object.changeColorRobot(value);}
+	this.object.changeColorRobot(value);} 
 );
-
+*/
 	// add a slider
 	// must be a numeric variable of the scene, initialized in scene.init e.g.
 	// this.speed=3;
@@ -87,7 +87,7 @@ MyInterface.prototype.init = function(application) {
 	
 	this.gui.add(this.scene, 'speedRobot', 0, 3).name('Robot speed').onChange(
 		function(value){
-	console.log(value);
+	//console.log(value);
 	this.object.changeSpeedRobot(value);
 }
 );
@@ -124,19 +124,21 @@ MyInterface.prototype.processKeyboard = function(event) {
 		case (111):	//  o
 		  {//this.scene.helloArm(); // descomentar e apagar tudo o resto que esta para baixo se nao interessar; neste caso
 		  // e necessario deixar premido a tecla 'o' para o braço rodar;
-		  	var count = 0;
+/*		  	var count = 0;
 		  	var c = this.scene;
 var variable = setInterval(function(){ c.helloArm(); count++; 		  	
 		  	if(count == 20)
 		  		stopInterval();
 }, 100); myVar = variable;
-c.removeAngles();
+c.removeAngles();*/
+		  	this.scene.helloArm();
+//		  setInterval(function(){c.helloArm()}, 1000);
 		  break;}
 	};
 };
-
+/*
 var myVar;
 
 function stopInterval() {
   clearInterval(myVar);
-}
+}*/
