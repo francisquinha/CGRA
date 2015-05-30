@@ -20,8 +20,7 @@ LightingScene.prototype.init = function(application) {
 	this.changeColor = [ 0, 128, 255 ]; // RGB array
 	this.speedRobot = 0.2;
 	this.pauseW = false;
-	
-
+	this.openW = false;
 	this.currRobotAppearance = 0;
 
 
@@ -53,10 +52,15 @@ LightingScene.prototype.init = function(application) {
 	this.table = new MyTable(this);
 	this.chair = new MyChair(this);
 	this.clock = new MyClock(this, 12, 4);
-	this.paperPlane = new MyPaperPlane(this, 12, 4.4, 8, -0.003, 0.0002, -0.004, 0.0004);
+	this.paperPlane = new MyPaperPlane(this, 12, 4.4, 10, -0.003, 0.0002, -0.004, 0.0004);
 	
+
 	this.floor = new MyQuad(this, 0.0, 10.0, 0.0, 12.0);
-	this.leftWall = new MyQuad(this, -1, 2, -0.5, 1.5);
+	
+	this.leftWall = new MyLeftWindow(this, -1, 2, -0.5, 1.5);
+	//this.leftWall = new Plane(this, 10, -1, 2, -0.5, 1.5);
+	//this.leftWall = new MyQuad(this, -1, 2, -0.5, 1.5);
+	this.planeWindow = new Plane(this);
 
 	this.wall = new Plane(this);
 	this.boardA = new Plane(this, BOARD_A_DIVISIONS, -0.15, 1.15, 0, 1);
@@ -135,6 +139,14 @@ LightingScene.prototype.init = function(application) {
 	this.ballAppearance.setSpecular(1, 1, 1, 0.6);	
 	this.ballAppearance.setShininess(10);
 	this.ballAppearance.loadTexture('../resources/images/ball.png');
+
+	this.planeWindowAppearance = new CGFappearance(this);
+	this.planeWindowAppearance.setAmbient(1, 1, 1, 1);
+	this.planeWindowAppearance.setDiffuse(1, 1, 1, 0.4);
+	this.planeWindowAppearance.setSpecular(1, 1, 1, 1);	
+	this.planeWindowAppearance.setShininess(120);
+	this.planeWindowAppearance.loadTexture('../resources/images/imageWindow.jpg');
+
 
 this.setUpdatePeriod(100);
 
@@ -240,6 +252,24 @@ LightingScene.prototype.display = function() {
 
 	// ---- BEGIN Primitive drawing section
 
+	// Left Wall
+	this.pushMatrix();
+		this.translate(0, 4, 7.5);
+		this.rotate(90 * degToRad, 0, 1, 0);
+		this.scale(15.1, 8.05, 0.2);
+		this.windowAppearance.apply();
+		this.leftWall.display();
+	this.popMatrix();
+
+	// Plane by Window
+	this.pushMatrix();
+		this.translate(-10, 5, 7.5);
+		this.rotate(-90 * degToRad, 0, -1, 0);
+		this.scale(30, 15, 0.2);
+		this.planeWindowAppearance.apply();
+		this.planeWindow.display();
+	this.popMatrix();
+
 	// Floor
 	this.pushMatrix();
 		this.translate(7.5, 0, 7.5);
@@ -248,7 +278,7 @@ LightingScene.prototype.display = function() {
 		this.floorAppearance.apply();
 		this.floor.display();
 	this.popMatrix();
-
+/*
 	// Left Wall
 	this.pushMatrix();
 		this.translate(0, 4, 7.5);
@@ -257,7 +287,7 @@ LightingScene.prototype.display = function() {
 		this.windowAppearance.apply();
 		this.leftWall.display();
 	this.popMatrix();
-
+*/
 	// Plane Wall
 	this.pushMatrix();
 		this.translate(7.5, 4, 0);
@@ -492,9 +522,8 @@ LightingScene.prototype.updateBoxLights = function (){
 };
 
 LightingScene.prototype.pauseWatch = function (currTime){ 
-	if(this.pauseW == true) this.pauseW = false;
+	if(this.pauseW == true) {this.pauseW = false;}
 	else this.pauseW = true;
-	
 };
 
 LightingScene.prototype.rotateLeft = function (){ 
@@ -532,4 +561,21 @@ LightingScene.prototype.changeColorRobot = function(changeColor){
 LightingScene.prototype.changeSpeedRobot = function(speed){ 
 	this.speedRobot = speed;
 	this.robot.setSpeed(this.speedRobot);
+};
+
+LightingScene.prototype.helloArm = function (){ 
+	this.robot.helloArm();
+};
+
+LightingScene.prototype.openWindow = function (){ 
+	if(this.openW == true) 
+	{
+		console.log(this.openW);
+		this.openW = false;
+	}
+	else 
+	{
+		console.log(this.openW);
+		this.openW = true;	
+	}
 };

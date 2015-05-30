@@ -338,3 +338,9 @@ MyRobot.prototype.setColor = function(color) {
 	this.leftWheel.setColor(color);
 	this.rightWheel.setColor(color);
 };
+
+MyRobot.prototype.helloArm = function() {
+this.leftArm.setAngle(180 * degToRad);
+this.leftArm.setHelloAngle(5 * degToRad);
+};
+

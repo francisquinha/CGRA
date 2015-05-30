@@ -7,12 +7,16 @@
 //MyArm e uma subclasse de CGFobject
 function MyArm(scene, angle, appearance) {
 	CGFobject.call(this,scene);
+	
 	this.angle = angle;
+	this.helloAngle = 0;
+	
 
 	this.armNewAppearance = appearance;
 	this.middle = new MyCylinder(scene, 16, 8);
 	this.top = new MyLamp(scene, 16, 8);
 	this.bottom = new MyLamp(scene, 16, 8);
+
 	this.initBuffers();
 };
 
@@ -23,7 +27,10 @@ MyArm.prototype.display = function() {
    
 	this.armNewAppearance.apply();
     this.scene.rotate(this.angle, 1, 0, 0);
-
+    
+   	this.scene.rotate(this.helloAngle, 0, 1, 0);
+	
+	
     this.scene.pushMatrix();
     this.scene.scale(0.2,0.2,1.4)
     this.middle.display();
@@ -50,4 +57,12 @@ MyArm.prototype.setAngle = function (angle) {
 
 MyArm.prototype.setAppearance = function (appearance) {
 	this.armNewAppearance = appearance;
+};
+
+
+
+MyArm.prototype.setHelloAngle = function (angle) {
+	this.helloAngle -= angle;
+	if(this.helloAngle/degToRad <= -30)
+	this.helloAngle = 0;
 };

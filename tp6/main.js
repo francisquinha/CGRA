@@ -28,6 +28,7 @@ serialInclude([
 	'MyArm.js',
 	'MyHead.js',
 	'MyBody.js',
+	'MyLeftWindow.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
