@@ -8,6 +8,8 @@
 	this.slices=slices;
 	this.stacks=stacks;
 
+	this.milisegundos = 0;
+
  	this.initBuffers();
  };
 
@@ -38,23 +40,32 @@
 
 		for (i = 0; i < this.slices; i++) {
 
-			var x0 = Math.sin(ang_1_now) * Math.cos(ang_0_now);
-			var y0 = Math.cos(ang_1_now);
-			var z0 = Math.sin(ang_1_now) * Math.sin(ang_0_now);
+			var cos1n = Math.cos(ang_1_now);
+			var cos0n = Math.cos(ang_0_now);
+			var sin1n = Math.sin(ang_1_now);
+			var sin0n = Math.sin(ang_0_now);
+			var cos1t = Math.cos(ang_1_then);
+			var sin1t = Math.sin(ang_1_then);
 
-			var x2 = Math.sin(ang_1_then) * Math.cos(ang_0_now);
-			var y2 = Math.cos(ang_1_then);
-			var z2 = Math.sin(ang_1_then) * Math.sin(ang_0_now);
+			var x0 = sin1n * cos0n;
+			var y0 = cos1n;
+			var z0 = sin1n * sin0n;
+
+			var x2 = sin1t * cos0n;
+			var y2 = cos1t;
+			var z2 = sin1t * sin0n;
 
 			ang_0_now += ang_0;
+			cos0n = Math.cos(ang_0_now);
+			sin0n = Math.sin(ang_0_now);
 
-			var x1 = Math.sin(ang_1_now) * Math.cos(ang_0_now);
-			var y1 = Math.cos(ang_1_now);
-			var z1 = Math.sin(ang_1_now) * Math.sin(ang_0_now);
+			var x1 = sin1n * cos0n;
+			var y1 = cos1n;
+			var z1 = sin1n * sin0n;
 
-			var x3 = Math.sin(ang_1_then) * Math.cos(ang_0_now);
-			var y3 = Math.cos(ang_1_then);
-			var z3 = Math.sin(ang_1_then) * Math.sin(ang_0_now);
+			var x3 = sin1t * cos0n;
+			var y3 = cos1t;
+			var z3 = sin1t * sin0n;
 
 			this.vertices.push(x0);
 			this.vertices.push(y0);

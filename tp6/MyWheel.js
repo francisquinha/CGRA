@@ -12,7 +12,7 @@ function MyWheel(scene, angle, appearance1, appearance2) {
 	this.wheelNewAppearance = appearance1;
 	this.restNewAppearance = appearance2;
 	this.actualColor = [1, 1, 1];
-	this.tire = new MyTorus(scene, 8, 8, 0.3);
+	this.tire = new MyTorus(scene, 16, 16, 0.3);
 	this.rim1 = new MyClosedCylinder(scene, 8, 2);
 	this.rim2 = new MyClosedCylinder(scene, 8, 2);
 	this.rim3 = new MyClosedCylinder(scene, 8, 2);

@@ -13,7 +13,7 @@ function MyArm(scene, angle, appearance) {
 	this.direction = 1;
 
 	this.armNewAppearance = appearance;
-	this.middle = new MyCylinder(scene, 16, 8);
+	this.middle = new MyCylinder(scene, 16, 4);
 	this.top = new MyLamp(scene, 16, 8);
 	this.bottom = new MyLamp(scene, 16, 8);
 

@@ -11,10 +11,9 @@ function MyBody(scene, appearance1, appearance2) {
 	this.bodyNewAppearance = appearance1;
 	this.restNewAppearance = appearance2;
 	this.actualColor = [1, 1, 1];
-	this.upperBody = new MyClosedCylinder(scene, 8, 2);
-	this.lowerBody = new MyCylinder(scene, 8, 4);
-	this.neck = new MyClosedCylinder(scene, 8, 4);
-	this.axis = new MyClosedCylinder(scene, 8, 4);
+	this.upperBody = new MyClosedCylinder(scene, 16, 4);
+	this.lowerBody = new MyCylinder(scene, 16, 2);
+	this.axis = new MyClosedCylinder(scene, 16, 2);
 	this.initBuffers();
 
 };

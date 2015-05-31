@@ -165,7 +165,7 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 	this.body = new MyBody(scene, this.bodyBender, this.bodyBender);
 	this.leftArm = new MyArm(scene, 0, this.bodyBender);
 	this.rightArm = new MyArm(scene, 0, this.bodyBender);
-	this.head = new MyLamp(scene, 8, 4);
+	this.head = new MyLamp(scene, 16, 8);
 	this.leftWheel = new MyWheel(scene, 0, this.wheelBender, this.bodyBender);
 	this.rightWheel = new MyWheel(scene, 0, this.wheelBender, this.bodyBender);
 	
@@ -174,40 +174,6 @@ function MyRobot(scene, xOff, yOff, zOff, angle) {
 
 MyRobot.prototype = Object.create(CGFobject.prototype);
 MyRobot.prototype.constructor=MyRobot;
-
-/*
-MyRobot.prototype.initBuffers = function () {
-	this.vertices = [
-           0.5, 0.3, 0,
-           -0.5, 0.3, 0,
-           0, 0.3, 2
-			];
-
-	this.indices = [
-            0, 1, 2
-			//3, 2, 1,
-        ];
-		
-	this.primitiveType=this.scene.gl.TRIANGLES;
-
-    this.normals = [ 0, 0, 1,
-                     0, 0, 1,
-                     0, 0, 1
-                    // 0, 0, 1 
-                    ];
-
-
-    this.texCoords = [
-    
-		this.minS, this.maxT,
-		this.maxS, this.maxT,
-		this.minS, this.minT,
-		this.maxS, this.minT
-		];
-
-	this.initGLBuffers();
-};
-*/
 
 MyRobot.prototype.rotateLeft = function () {
 	this.angle += 5*degToRad;

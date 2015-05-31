@@ -22,7 +22,6 @@ LightingScene.prototype.init = function(application) {
 	this.pauseW = false;
 	this.openW = true;
 	this.currRobotAppearance = 0;
-	this.changeWindow = false;
 
 
 //////////////////////////////////////////////////
@@ -46,9 +45,9 @@ LightingScene.prototype.init = function(application) {
 	// Scene elements
 
 	this.robot = new MyRobot(this, 8.3, 5, 5, -140);
-	this.ball = new MyBall(this, 8, 8);
-	this.lamp = new MyLamp(this, 8, 4);
-	this.cylinder = new MyCylinder(this, 8, 8);
+	this.ball = new MyBall(this, 16, 16);
+	this.lamp = new MyLamp(this, 16, 8);
+	this.cylinder = new MyCylinder(this, 16, 8);
 	this.table = new MyTable(this);
 	this.chair = new MyChair(this);
 	this.clock = new MyClock(this, 12, 2);
@@ -576,12 +575,10 @@ LightingScene.prototype.openWindow = function (){
 	{
 		this.leftWall = new Plane(this, 10, -1, 2, -0.5, 1.5);
 		this.openW = false;
-		this.changeWindow = true;
 	}
 	else 
 	{
 		this.leftWall = new MyLeftWindow(this);
 		this.openW = true;	
-		this.changeWindow = false;
 	}
 };
