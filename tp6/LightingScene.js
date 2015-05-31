@@ -255,7 +255,7 @@ LightingScene.prototype.display = function() {
 	this.pushMatrix();
 		this.translate(0, 4, 7.5);
 		this.rotate(90 * degToRad, 0, 1, 0);
-		this.scale(15.1, 8.05, 0.2);
+		this.scale(15, 8, 0.2);
 		this.windowAppearance.apply();
 		this.leftWall.display();
 	this.popMatrix();
