@@ -5,13 +5,9 @@
  */
 
 //MyLeftWindow e uma subclasse de CGFobject
-function MyLeftWindow(scene,minS,maxS, minT, maxT) {
+function MyLeftWindow(scene) {
 	CGFobject.call(this,scene);
 
-    this.minS = minS;
-	this.maxS = maxS;
-	this.minT = minT;
-	this.maxT = maxT;
 /*
 	this.one = new MyQuad(scene);//, minS,maxS,minT,maxT);
 	this.two = new MyQuad(scene);//, minS,maxS,minT,maxT);
@@ -84,20 +80,20 @@ MyLeftWindow.prototype.display = function() {
 MyLeftWindow.prototype.initBuffers = function () {
 	this.vertices = [
             -0.5, -0.5, 0,
-            -0.15, -0.5, 0,
-            0.15, -0.5, 0,
+            -0.155, -0.5, 0,
+            0.155, -0.5, 0,
             0.5, -0.5, 0,
-            -0.5, -0.15, 0,
-            -0.15, -0.15, 0,
-            0.15, -0.15, 0,
-            0.5, -0.15, 0,
-            -0.5, 0.15, 0,
-            -0.15, 0.15, 0,
-            0.15, 0.15, 0,
-            0.5, 0.15, 0,
+            -0.5, -0.23, 0,
+            -0.155, -0.23, 0,
+            0.155, -0.23, 0,
+            0.5, -0.23, 0,
+            -0.5, 0.23, 0,
+            -0.155, 0.23, 0,
+            0.155, 0.23, 0,
+            0.5, 0.23, 0,
             -0.5, 0.5, 0,
-            -0.15, 0.5, 0,
-            0.15, 0.5, 0,
+            -0.155, 0.5, 0,
+            0.155, 0.5, 0,
             0.5, 0.5, 0	            
 			];
 
@@ -141,22 +137,22 @@ MyLeftWindow.prototype.initBuffers = function () {
 
 
     this.texCoords = [    
-           -0.97, -0.97,
-           0.03, -0.97,
-           0.97, -0.97,
-           1.97, -0.97,
-           -0.97, 0.06,
-           0.03, 0.06,
-           0.97, 0.06,
-           1.97, 0.06,
-           -0.97, 0.94,
-           0.03, 0.94,
-           0.97, 0.94,
-           1.97, 0.94,
            -0.97, 1.97,
            0.03, 1.97,
            0.97, 1.97,
            1.97, 1.97,
+           -0.97, 0.94,
+           0.03, 0.94,
+           0.97, 0.94,
+           1.97, 0.94,
+           -0.97, 0.06,
+           0.03, 0.06,
+           0.97, 0.06,
+           1.97, 0.06,
+           -0.97, -0.97,
+           0.03, -0.97,
+           0.97, -0.97,
+           1.97, -0.97,
            	            
 		];
 
