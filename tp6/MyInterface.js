@@ -74,12 +74,12 @@ MyInterface.prototype.init = function(application) {
 	lights.add(this.scene, 'windowLight').name('Window light');
 	
 	// Colors
-	/*	
+		
 	this.gui.addColor(this.scene, 'changeColor').name('Robot body color').listen().onChange(function(value){
 	changeColor = value;
 	this.object.changeColorRobot(value);} 
 );
-*/
+
 	// add a slider
 	// must be a numeric variable of the scene, initialized in scene.init e.g.
 	// this.speed=3;

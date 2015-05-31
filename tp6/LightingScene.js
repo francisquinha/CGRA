@@ -294,7 +294,7 @@ LightingScene.prototype.display = function() {
 		this.materialW.apply();
 		this.wall.display();
 	this.popMatrix();
-/*
+
 	// First Table
 	this.pushMatrix();
 		this.translate(5, 0, 8);
@@ -444,7 +444,7 @@ LightingScene.prototype.display = function() {
 		this.cylinderAppearance.apply();
 		this.cylinder.display();
 	this.popMatrix();
-*/
+
 // globo
 	this.pushMatrix();
 		this.translate(13.5, 0, 1.5);
@@ -574,13 +574,11 @@ LightingScene.prototype.openWindow = function (){
 	if(this.openW == true) 
 	{
 		this.leftWall = new Plane(this, 10, -1, 2, -0.5, 1.5);
-		console.log(this.openW);
 		this.openW = false;
 	}
 	else 
 	{
 		this.leftWall = new MyLeftWindow(this);
-		console.log(this.openW);
 		this.openW = true;	
 	}
 };

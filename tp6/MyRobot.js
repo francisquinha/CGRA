@@ -19,12 +19,6 @@ thingsToHello = function(){
 }();
 
 
-/*var count = 0;
-var ID;
-var left = 0;
-var oscila = false;
-*/
-
 //MyRobot e uma subclasse de CGFobject
 function MyRobot(scene, xOff, yOff, zOff, angle) {
 	CGFobject.call(this,scene);
@@ -248,7 +242,7 @@ MyRobot.prototype.translateForward = function () {
 	this.rightWheelAngle += 2.5 * this.speedRobot;
 	this.leftWheel.setAngle(this.leftWheelAngle);
 	this.rightWheel.setAngle(this.rightWheelAngle);
-	
+
 	if (this.forward == 0) this.going = 1 - this.going;
 	this.forward = 1;
 	if (this.rightArmAngle >= 1 || this.rightArmAngle <= -1) this.going = 1 - this.going;
@@ -389,7 +383,6 @@ function stopInterval(arm, angle) {
 };
 */
 
-
 MyRobot.prototype.helloArm = function() {
 
 thingsToHello.oscila = true;
@@ -399,13 +392,6 @@ thingsToHello.arm.setAngle(180 * degToRad);
 
 requestAnimationFrame(draw);
 
-	/*this.hello = 1;
-	this.leftArm.setAngle(180 * degToRad);
-	var count = 0;
-	var a = this.leftArm;
-	var b = this.leftArmAngle;
-
-	a.setHelloAngle(0.1);*/
 	//var intervalo = setInterval(function(){a.setHelloAngle(0.1); count++; if (count == 40) stopInterval(a, b);}, 50);
 	//inter = intervalo;
 
@@ -422,7 +408,6 @@ function draw(timeStamp) {
     // call the draw function again!
    ID = requestAnimationFrame(draw);
    thingsToHello.count++;
-   console.log(thingsToHello.left);
 
    if(thingsToHello.count == 180)
       {
