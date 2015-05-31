@@ -61,8 +61,13 @@ MyInterface.prototype.init = function(application) {
 	);
 	        
 	        
+var nameGui = this.gui.add(this.scene, 'openWindow').name('Close window').onChange(
+		function(){
+			if(this.object.changeWindow)
+			nameGui.name('Close window');
+			else nameGui.name('Open window');
+		});
 
-	 this.gui.add(this.scene, 'openWindow').name('Open window');
 
 
 	// add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean

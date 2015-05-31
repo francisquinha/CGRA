@@ -22,6 +22,7 @@ LightingScene.prototype.init = function(application) {
 	this.pauseW = false;
 	this.openW = true;
 	this.currRobotAppearance = 0;
+	this.changeWindow = false;
 
 
 //////////////////////////////////////////////////
@@ -575,10 +576,12 @@ LightingScene.prototype.openWindow = function (){
 	{
 		this.leftWall = new Plane(this, 10, -1, 2, -0.5, 1.5);
 		this.openW = false;
+		this.changeWindow = true;
 	}
 	else 
 	{
 		this.leftWall = new MyLeftWindow(this);
 		this.openW = true;	
+		this.changeWindow = false;
 	}
 };
