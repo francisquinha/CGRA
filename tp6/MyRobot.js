@@ -4,6 +4,27 @@
  * @constructor
  */
 
+thingsToHello = function(){
+  	var oscila=false;
+  	var count=0;
+	var ID=0;
+	var left=0;
+	var arm=null;
+	return{
+    oscila,
+    count,
+    ID,
+    left
+  }
+}();
+
+
+/*var count = 0;
+var ID;
+var left = 0;
+var oscila = false;
+*/
+
 //MyRobot e uma subclasse de CGFobject
 function MyRobot(scene, xOff, yOff, zOff, angle) {
 	CGFobject.call(this,scene);
@@ -202,8 +223,9 @@ MyRobot.prototype.rotateLeft = function () {
 	this.rightWheel.setAngle(this.rightWheelAngle);
 	this.leftArmAngle = 0;
 	this.rightArmAngle = 0;
-	this.leftArm.setAngle(this.leftArmAngle);
+	if(thingsToHello.oscila == false)  this.leftArm.setAngle(this.leftArmAngle);
 	this.rightArm.setAngle(this.rightArmAngle);
+	thingsToHello.left = this.rightArmAngle;
 };
 
 MyRobot.prototype.rotateRight = function () {
@@ -214,8 +236,9 @@ MyRobot.prototype.rotateRight = function () {
 	this.rightWheel.setAngle(this.rightWheelAngle);
 	this.leftArmAngle = 0;
 	this.rightArmAngle = 0;
-	this.leftArm.setAngle(this.leftArmAngle);
+	if(thingsToHello.oscila == false) this.leftArm.setAngle(this.leftArmAngle);
 	this.rightArm.setAngle(this.rightArmAngle);
+	thingsToHello.left = this.rightArmAngle;
 };
 
 MyRobot.prototype.translateForward = function () {
@@ -235,11 +258,15 @@ MyRobot.prototype.translateForward = function () {
 		else this.rightArmAngle += this.speedRobot;
 	}
 
+
 	if ((this.going == 1 && this.leftArmAngle < 1) || this.leftArmAngle <= -1) this.leftArmAngle += this.speedRobot;
 	else this.leftArmAngle -= this.speedRobot;
 
-	this.leftArm.setAngle(this.leftArmAngle);
+
+	if(thingsToHello.oscila == false){	this.leftArm.setAngle(this.leftArmAngle);
+}
 	this.rightArm.setAngle(this.rightArmAngle);
+	thingsToHello.left = this.rightArmAngle;
 
 };
 
@@ -260,11 +287,15 @@ MyRobot.prototype.translateBack = function () {
 		else this.rightArmAngle += this.speedRobot;
 	}
 
+
 	if ((this.going == 1 && this.leftArmAngle < 1) || this.leftArmAngle <= -1) this.leftArmAngle += this.speedRobot;
 	else this.leftArmAngle -= this.speedRobot;
 
-	this.leftArm.setAngle(this.leftArmAngle);
+	
+if(thingsToHello.oscila == false){this.leftArm.setAngle(this.leftArmAngle);
+}
 	this.rightArm.setAngle(this.rightArmAngle);
+	thingsToHello.left = this.rightArmAngle;
 };
 
 MyRobot.prototype.setXZ = function (x, z) {
@@ -349,21 +380,58 @@ MyRobot.prototype.stopInterval = function(inter) {
 	this.leftArm.resetHello();
 	this.hello = 0;
 };
-
+/*
 var inter;
 function stopInterval(arm, angle) {
-	clearInterval(inter);
+	//clearInterval(inter);
 	arm.resetHello();
 	arm.setAngle(angle);
-	
 };
+*/
+
 
 MyRobot.prototype.helloArm = function() {
-	this.hello = 1;
+
+thingsToHello.oscila = true;
+thingsToHello.arm = this.leftArm;
+//left = this.leftArmAngle;
+thingsToHello.arm.setAngle(180 * degToRad);
+
+requestAnimationFrame(draw);
+
+	/*this.hello = 1;
 	this.leftArm.setAngle(180 * degToRad);
 	var count = 0;
 	var a = this.leftArm;
 	var b = this.leftArmAngle;
-	var intervalo = setInterval(function(){a.setHelloAngle(0.1); count++; if (count == 40) stopInterval(a, b);}, 50);
-	inter = intervalo;
+
+	a.setHelloAngle(0.1);*/
+	//var intervalo = setInterval(function(){a.setHelloAngle(0.1); count++; if (count == 40) stopInterval(a, b);}, 50);
+	//inter = intervalo;
+
+};
+
+
+function draw(timeStamp) {
+	
+	//this.hello = 1;
+	
+//	var a = this.leftArm;
+	//var b = this.leftArmAngle;
+	thingsToHello.arm.setHelloAngle(0.02);
+    // call the draw function again!
+   ID = requestAnimationFrame(draw);
+   thingsToHello.count++;
+   console.log(thingsToHello.left);
+
+   if(thingsToHello.count == 180)
+      {
+	  	cancelAnimationFrame(ID);
+      thingsToHello.count = 0;
+      thingsToHello.oscila = false;
+      thingsToHello.arm.setAngle(-thingsToHello.left);
+     
+      //arm.setHelloAngle(50);//stopInterval(arm,-c*degToRad);
+      //arm.resetHello();
+      }
 };
