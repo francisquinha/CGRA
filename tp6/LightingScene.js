@@ -22,16 +22,12 @@ LightingScene.prototype.init = function(application) {
 	this.pauseW = false;
 	this.openW = true;
 	this.currRobotAppearance = 0;
-
-
-//////////////////////////////////////////////////
-/////////////////////////////////
+	this.changeWindow = false;
 
 	this.initCameras();
 
-//TP4
 	this.enableTextures(true);
-//
+
 	this.initLights();
 
     this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -58,7 +54,7 @@ LightingScene.prototype.init = function(application) {
 	
 	if (this.openW) this.leftWall = new MyLeftWindow(this);
 	else this.leftWall = new Plane(this, 10, -1, 2, -0.5, 1.5);
-	//this.leftWall = new MyQuad(this, -1, 2, -0.5, 1.5);
+	
 	this.planeWindow = new Plane(this);
 
 	this.wall = new Plane(this);
@@ -92,8 +88,6 @@ LightingScene.prototype.init = function(application) {
 	this.materialF.setSpecular(0.9, 0.9, 0.9, 1);	
 	this.materialF.setShininess(120);
 
-
-//TP4
 	this.floorAppearance = new CGFappearance(this);
 	this.floorAppearance.setAmbient(1, 1, 1, 1);
 	this.floorAppearance.setDiffuse(1, 1, 1, 0.4);
@@ -146,8 +140,7 @@ LightingScene.prototype.init = function(application) {
 	this.planeWindowAppearance.setShininess(120);
 	this.planeWindowAppearance.loadTexture('../resources/images/imageWindow.png');
 
-
-this.setUpdatePeriod(100);
+	this.setUpdatePeriod(100);
 
 };
 
@@ -163,8 +156,6 @@ LightingScene.prototype.initLights = function() {
 	// Positions for five lights
 	this.lights[0].setPosition(4.5, 6.0, 4.0, 1.0);
 	this.lights[1].setPosition(12, 6.0, 4.0, 1.0);
-	//this.lights[2].setPosition(12, 6.0, 9.0, 1.0);
-	//this.lights[3].setPosition(4.5, 6.0, 9.0, 1.0);
 	this.lights[2].setPosition(0, 4.0, 7.5, 1.0);
 	this.lights[3].setPosition(8.25, 6.0, 14.0, 1.0);
 
@@ -174,8 +165,6 @@ LightingScene.prototype.initLights = function() {
 	this.lights[0].setConstantAttenuation(0.0);
 	this.lights[0].setLinearAttenuation(0.4);
 	this.lights[0].setQuadraticAttenuation(0.0);
-	//this.lights[0].enable();
-
 	
 	this.lights[1].setAmbient(0.0, 0.0, 0.0, 1.0);
 	this.lights[1].setDiffuse(1.0, 1.0, 1.0, 0.5);
@@ -183,7 +172,6 @@ LightingScene.prototype.initLights = function() {
 	this.lights[1].setConstantAttenuation(0.0);
 	this.lights[1].setLinearAttenuation(0.4);
 	this.lights[1].setQuadraticAttenuation(0.0);
-	//this.lights[1].enable();
 
 	this.lights[2].setAmbient(0.0, 0.0, 0.0, 1.0);
 	this.lights[2].setDiffuse(1.0, 1.0, 1.0, 0.5);
@@ -191,7 +179,6 @@ LightingScene.prototype.initLights = function() {
 	this.lights[2].setConstantAttenuation(0.0);
 	this.lights[2].setLinearAttenuation(0.4);
 	this.lights[2].setQuadraticAttenuation(0.0);
-	//this.lights[2].enable();
 
 	this.lights[3].setAmbient(0.0, 0.0, 0.0, 1.0);
 	this.lights[3].setDiffuse(1.0, 1.0, 1.0, 0.5);
@@ -199,14 +186,10 @@ LightingScene.prototype.initLights = function() {
 	this.lights[3].setConstantAttenuation(0.0);
 	this.lights[3].setLinearAttenuation(0.4);
 	this.lights[3].setQuadraticAttenuation(0.0);
-	//this.lights[3].enable();
 
 	this.lights[0].setVisible(true);
 	this.lights[1].setVisible(true);
-	//this.lights[2].setVisible(true);
 	this.lights[3].setVisible(true);
-
-
 
 	this.shader.unbind();
 };
@@ -277,16 +260,7 @@ LightingScene.prototype.display = function() {
 		this.floorAppearance.apply();
 		this.floor.display();
 	this.popMatrix();
-/*
-	// Left Wall
-	this.pushMatrix();
-		this.translate(0, 4, 7.5);
-		this.rotate(90 * degToRad, 0, 1, 0);
-		this.scale(15, 8, 0.2);
-		this.windowAppearance.apply();
-		this.leftWall.display();
-	this.popMatrix();
-*/
+
 	// Plane Wall
 	this.pushMatrix();
 		this.translate(7.5, 4, 0);
@@ -489,8 +463,6 @@ LightingScene.prototype.display = function() {
 // ---- END Primitive drawing section
 
 	this.shader.unbind();
-
-
 };
 
 LightingScene.prototype.update = function (currTime) {
@@ -547,7 +519,6 @@ LightingScene.prototype.translateBack = function (){
 
 LightingScene.prototype.changeTextures = function (currRobotAppearance){ 
 	this.robot.setTextures(currRobotAppearance);
-//	console.log(currRobotAppearance);
 };
 
 
@@ -566,19 +537,17 @@ LightingScene.prototype.helloArm = function (){
 	this.robot.helloArm();
 };
 
-LightingScene.prototype.removeAngles = function() {
-	this.robot.removeAngles();
-}
-
 LightingScene.prototype.openWindow = function (){ 
 	if(this.openW == true) 
 	{
 		this.leftWall = new Plane(this, 10, -1, 2, -0.5, 1.5);
 		this.openW = false;
+		this.changeWindow = true;
 	}
 	else 
 	{
 		this.leftWall = new MyLeftWindow(this);
 		this.openW = true;	
+		this.changeWindow = false;
 	}
 };
