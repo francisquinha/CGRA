@@ -20,7 +20,7 @@ LightingScene.prototype.init = function(application) {
 	this.changeColor = [ 0, 128, 255 ]; // RGB array
 	this.speedRobot = 0.2;
 	this.pauseW = false;
-	this.openW = false;
+	this.openW = true;
 	this.currRobotAppearance = 0;
 
 
@@ -56,8 +56,8 @@ LightingScene.prototype.init = function(application) {
 
 	this.floor = new MyQuad(this, 0.0, 10.0, 0.0, 12.0);
 	
-	this.leftWall = new MyLeftWindow(this, -1, 2, -0.5, 1.5);
-	//this.leftWall = new Plane(this, 10, -1, 2, -0.5, 1.5);
+	if (this.openW) this.leftWall = new MyLeftWindow(this);
+	else this.leftWall = new Plane(this, 10, -1, 2, -0.5, 1.5);
 	//this.leftWall = new MyQuad(this, -1, 2, -0.5, 1.5);
 	this.planeWindow = new Plane(this);
 
@@ -573,11 +573,13 @@ LightingScene.prototype.removeAngles = function() {
 LightingScene.prototype.openWindow = function (){ 
 	if(this.openW == true) 
 	{
+		this.leftWall = new Plane(this, 10, -1, 2, -0.5, 1.5);
 		console.log(this.openW);
 		this.openW = false;
 	}
 	else 
 	{
+		this.leftWall = new MyLeftWindow(this);
 		console.log(this.openW);
 		this.openW = true;	
 	}

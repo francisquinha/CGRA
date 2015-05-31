@@ -122,23 +122,7 @@ MyInterface.prototype.processKeyboard = function(event) {
 		  {this.scene.translateForward();
 		  break;}
 		case (111):	//  o
-		  {//this.scene.helloArm(); // descomentar e apagar tudo o resto que esta para baixo se nao interessar; neste caso
-		  // e necessario deixar premido a tecla 'o' para o braço rodar;
-/*		  	var count = 0;
-		  	var c = this.scene;
-var variable = setInterval(function(){ c.helloArm(); count++; 		  	
-		  	if(count == 20)
-		  		stopInterval();
-}, 100); myVar = variable;
-c.removeAngles();*/
-		  	this.scene.helloArm();
-//		  setInterval(function(){c.helloArm()}, 1000);
+		  {this.scene.helloArm();
 		  break;}
 	};
 };
-/*
-var myVar;
-
-function stopInterval() {
-  clearInterval(myVar);
-}*/
