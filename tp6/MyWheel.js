@@ -8,7 +8,6 @@
 function MyWheel(scene, angle, appearance1, appearance2) {
 	CGFobject.call(this,scene);
 	this.angle = angle;
-
 	this.wheelNewAppearance = appearance1;
 	this.restNewAppearance = appearance2;
 	this.actualColor = [1, 1, 1];
@@ -52,8 +51,6 @@ MyWheel.prototype.display = function() {
     this.wheelNewAppearance.apply();
     this.tire.display();
     this.scene.popMatrix();
-
-
 };
 
 MyWheel.prototype.setAngle = function (angle) {

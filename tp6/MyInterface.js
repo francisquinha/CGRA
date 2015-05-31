@@ -30,15 +30,8 @@ MyInterface.prototype.init = function(application) {
 
 	// pause/resume watch
 	this.gui.add(this.scene, 'pauseWatch').name('Pause clock');	
-	// add a group of controls (and open/expand by defult)
 	
-    // change robot appearance
-	this.gui.add(this.scene, 'currRobotAppearance', { Robot1: 0, Robot2: 1, Robot3: 2, Robot4: 3}).name('Robot').onChange(
-		function(value){
-			currRobotAppearance = value;
-			this.object.changeTextures(value);
-	});
-	        
+
 	// change window mode
 	var nameGui = this.gui.add(this.scene, 'openWindow').name('Close window').onChange(
 		function(){
@@ -48,6 +41,7 @@ MyInterface.prototype.init = function(application) {
 	});
 
 	// lights on/off
+	// add a group of controls (and open/expand by defult)
 	var lights = this.gui.addFolder("Lights");
 	lights.open();
 
@@ -58,21 +52,27 @@ MyInterface.prototype.init = function(application) {
 	lights.add(this.scene, 'leftBoardLight').name('Left board light');
 	lights.add(this.scene, 'windowLight').name('Window light');
 	
-	// Colors
-		
-	this.gui.addColor(this.scene, 'changeColor').name('Robot body color').listen().onChange(function(value){
-	changeColor = value;
-	this.object.changeColorRobot(value);
-	});
-
 	// add a slider
 	// must be a numeric variable of the scene, initialized in scene.init e.g.
 	// this.speed=3;
 	// min and max values can be specified as parameters
 	
 	this.gui.add(this.scene, 'speedRobot', 0, 3).name('Robot speed').onChange(function(value){
-		this.object.changeSpeedRobot(value);
-});
+		this.object.changeSpeedRobot(value)
+	});
+
+	// Colors	
+	this.gui.addColor(this.scene, 'changeColor').name('Robot body color').listen().onChange(function(value){
+	changeColor = value;
+	this.object.changeColorRobot(value);
+	});
+
+	// change robot appearance
+	this.gui.add(this.scene, 'currRobotAppearance', { Robot1: 0, Robot2: 1, Robot3: 2, Robot4: 3}).name('Robot').onChange(
+		function(value){
+			currRobotAppearance = value;
+			this.object.changeTextures(value);
+	});
 	
 	return true;
 };
