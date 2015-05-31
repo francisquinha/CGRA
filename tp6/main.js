@@ -26,7 +26,6 @@ serialInclude([
 	'MyWheel.js',
 	'MySphere.js',
 	'MyArm.js',
-	'MyHead.js',
 	'MyBody.js',
 	'MyLeftWindow.js',
 

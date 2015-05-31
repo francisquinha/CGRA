@@ -40,40 +40,48 @@
 
 		for (i = 0; i < this.slices; i++) {
 
+			var cos1n = Math.cos(ang_1_now);
+			var cos0n = Math.cos(ang_0_now);
+			var sin1n = Math.sin(ang_1_now);
+			var sin0n = Math.sin(ang_0_now);
+			var cos1t = Math.cos(ang_1_then);
+			var sin1t = Math.sin(ang_1_then);
 
-			var x0 = Math.cos(ang_1_now) * (this.R + this.r * Math.cos(ang_0_now));
-			var y0 = - Math.sin(ang_1_now) * (this.R + this.r * Math.cos(ang_0_now));
-			var z0 = this.r * Math.sin(ang_0_now);
+			var x0 = cos1n * (this.R + this.r * cos0n);
+			var y0 = - sin1n * (this.R + this.r * cos0n);
+			var z0 = this.r * sin0n;
 
-			var nx0 = Math.cos(ang_1_now) * Math.cos(ang_0_now);
-			var ny0 = - Math.sin(ang_1_now) * Math.cos(ang_0_now);
-			var nz0 = Math.sin(ang_0_now);
+			var nx0 = cos1n * cos0n;
+			var ny0 = - sin1n * cos0n;
+			var nz0 = sin0n;
 
-			var x2 = Math.cos(ang_1_then) * (this.R + this.r * Math.cos(ang_0_now));
-			var y2 = - Math.sin(ang_1_then) * (this.R + this.r * Math.cos(ang_0_now));
-			var z2 = this.r * Math.sin(ang_0_now);
+			var x2 = cos1t * (this.R + this.r * cos0n);
+			var y2 = - sin1t * (this.R + this.r * cos0n);
+			var z2 = this.r * sin0n;
 
-			var nx2 = Math.cos(ang_1_then) * Math.cos(ang_0_now);
-			var ny2 = - Math.sin(ang_1_then) * Math.cos(ang_0_now);
-			var nz2 = Math.sin(ang_0_now);
+			var nx2 = cos1t * cos0n;
+			var ny2 = - sin1t * cos0n;
+			var nz2 = sin0n;
 
 			ang_0_now += ang_0;
+			cos0n = Math.cos(ang_0_now);
+			sin0n = Math.sin(ang_0_now);
 
-			var x1 = Math.cos(ang_1_now) * (this.R + this.r * Math.cos(ang_0_now));
-			var y1 = - Math.sin(ang_1_now) * (this.R + this.r * Math.cos(ang_0_now));
-			var z1 = this.r * Math.sin(ang_0_now);
+			var x1 = cos1n * (this.R + this.r * cos0n);
+			var y1 = - sin1n * (this.R + this.r * cos0n);
+			var z1 = this.r * sin0n;
 
-			var nx1 = Math.cos(ang_1_now) * Math.cos(ang_0_now);
-			var ny1 = - Math.sin(ang_1_now) * Math.cos(ang_0_now);
+			var nx1 = cos1n * cos0n;
+			var ny1 = - sin1n * cos0n;
 			var nz1 = Math.sin(ang_0_now);
 
-			var x3 = Math.cos(ang_1_then) * (this.R + this.r * Math.cos(ang_0_now));
-			var y3 = - Math.sin(ang_1_then) * (this.R + this.r * Math.cos(ang_0_now));
-			var z3 = this.r * Math.sin(ang_0_now);
+			var x3 = cos1t * (this.R + this.r * cos0n);
+			var y3 = - sin1t * (this.R + this.r * cos0n);
+			var z3 = this.r * sin0n;
 
-			var nx3 = Math.cos(ang_1_then) * Math.cos(ang_0_now);
-			var ny3 = - Math.sin(ang_1_then) * Math.cos(ang_0_now);
-			var nz3 = Math.sin(ang_0_now);
+			var nx3 = cos1t * cos0n;
+			var ny3 = - sin1t * cos0n;
+			var nz3 = sin0n;
 
 			this.vertices.push(x0);
 			this.vertices.push(y0);
