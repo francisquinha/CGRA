@@ -20,9 +20,7 @@
 	this.ZOffset = ZOffset;
 	
 	this.angle = 0;
-
 	this.milisegundos = Date.now();
-
 	this.hitwall = Date.now();
 
 	this.velX = velX;
@@ -30,14 +28,12 @@
 	this.velY2 = velY2;
 	this.velZ = velZ;
 
-
 	this.wingsAppearance = new CGFappearance(this.scene);
 	this.wingsAppearance.setAmbient(1, 1, 1, 0.5);
 	this.wingsAppearance.setDiffuse(1, 1, 1, 0.2);
 	this.wingsAppearance.setSpecular(1, 1, 1, 0.1);
 	this.wingsAppearance.setShininess(1);
 	this.wingsAppearance.loadTexture('../resources/images/squares.png');
-
  };
 
  MyPaperPlane.prototype = Object.create(CGFobject.prototype);

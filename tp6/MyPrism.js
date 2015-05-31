@@ -16,8 +16,6 @@
 
  MyPrism.prototype.initBuffers = function() {
 
-	var degToRad = Math.PI / 180.0;
-
 	var ang = 360 * degToRad / this.slices;
 	var half_ang = ang / 2;
 
@@ -63,7 +61,7 @@
 
  			var ind_i_j = ind_i + ind_j;
 
-			this.indices.push(ind_i_j); // 0
+			this.indices.push(ind_i_j); 	// 0
 			this.indices.push(ind_i_j + 1); // 1
 			this.indices.push(ind_i_j + 2); // 2
 
@@ -90,5 +88,4 @@
 
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();
- 	
  };

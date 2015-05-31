@@ -15,7 +15,6 @@ function MyBody(scene, appearance1, appearance2) {
 	this.lowerBody = new MyCylinder(scene, 16, 2);
 	this.axis = new MyClosedCylinder(scene, 16, 2);
 	this.initBuffers();
-
 };
 
 MyBody.prototype = Object.create(CGFobject.prototype);

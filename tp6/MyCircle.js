@@ -9,18 +9,15 @@
 	this.maxS = maxS || 1;
 	this.minT = minT || 0;
 	this.maxT = maxT || 1;
-
 	this.slices=slices;
+	
  	this.initBuffers();
-
 };
 
  MyCircle.prototype = Object.create(CGFobject.prototype);
  MyCircle.prototype.constructor = MyCircle;
 
  MyCircle.prototype.initBuffers = function() {
-
-	var degToRad = Math.PI / 180.0;
 
 	var ang = 360 * degToRad / this.slices;
 
@@ -54,7 +51,7 @@
 		this.vertices.push(0);
 		this.vertices.push(0); // vertice 2
 
-		this.indices.push(ind_i); // 0
+		this.indices.push(ind_i); 	  // 0
 		this.indices.push(ind_i + 1); // 1
 		this.indices.push(ind_i + 2); // 2
 

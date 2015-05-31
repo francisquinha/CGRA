@@ -15,25 +15,8 @@
 	this.topo1 = new MyCircle(scene, this.slices);
 	this.topo1.initBuffers();
 	this.topo2 = new MyCircle(scene, this.slices);
+	
 	this.topo2.initBuffers();
-/*	
-	this.defaultRobotAppearance = new CGFappearance(this.scene);
-	this.defaultRobotAppearance.setAmbient(this.actualColor[0], this.actualColor[1], this.actualColor[2], 0.5);
-	this.defaultRobotAppearance.setDiffuse(this.actualColor[0], this.actualColor[1], this.actualColor[2], 0.2);
-	this.defaultRobotAppearance.setSpecular(this.actualColor[0], this.actualColor[1], this.actualColor[2], 0.1);
-	this.defaultRobotAppearance.setShininess(1);
-
-	//this.defaultApperance = 'undefined';//this.defaultRobotAppearance;
-
-	this.materialC = new CGFappearance(this.scene);
-	this.materialC.setAmbient(1, 1, 1, 0.8);
-	this.materialC.setDiffuse(1, 1, 1, 0.8);
-	this.materialC.setSpecular(1, 1, 1, 0.6);	
-	this.materialC.setShininess(10);
-
-    var currentTime = Date.now();
-	this.milisegundos = 0;
-*/
  };
 
  MyClosedCylinder.prototype = Object.create(CGFobject.prototype);
@@ -45,29 +28,18 @@
 
     this.scene.pushMatrix();
     this.scene.translate(0, 0, 1);
-//    this.materialC.apply();
     this.topo1.display();
     this.scene.popMatrix();
 
 	this.scene.pushMatrix();
     this.scene.scale(-1,1,1);
-//    this.materialC.apply();
     this.topo2.display();
     this.scene.popMatrix();
 
     this.scene.pushMatrix();
-//   	this.defaultRobotAppearance.apply();
   	this.corpo.display();
 	this.scene.popMatrix();
 };
-
-/*
-MyClock.prototype.update = function (currTime) {
-	this.segundo = (currTime - this.milisegundos) / 1000;
-	this.minuto = (currTime - this.milisegundos)/ 60000;
-	this.hora = (currTime - this.milisegundos) / 3600000;
-};
-*/
 
 MyClosedCylinder.prototype.setAngle = function (angle, xOff, yOff, zOff) {
 	this.angle = angle;
@@ -75,5 +47,3 @@ MyClosedCylinder.prototype.setAngle = function (angle, xOff, yOff, zOff) {
 	this.yOff = yOff;
 	this.zOff = zOff;
 };
-/*
-*/

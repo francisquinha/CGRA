@@ -16,8 +16,6 @@
 
  MySphere.prototype.initBuffers = function() {
 
-	var degToRad = Math.PI / 180.0;
-
 	var ang_0 = 360 * degToRad / this.slices;
 	var ang_1 = 180 * degToRad / this.stacks;
 
@@ -74,7 +72,7 @@
 
  			var ind_i_j = ind_i + ind_j;
 
-			this.indices.push(ind_i_j); // 0
+			this.indices.push(ind_i_j); 	// 0
 			this.indices.push(ind_i_j + 1); // 1
 			this.indices.push(ind_i_j + 2); // 2
 
@@ -109,16 +107,11 @@
 			this.texCoords.push(1 - (i + 1) / this.slices, j / this.stacks);
 			this.texCoords.push(1 - i / this.slices, (j + 1) / this.stacks);
 			this.texCoords.push(1 - (i + 1) / this.slices, (j + 1) / this.stacks);
-
 		}			
-
 		ang_1_now += ang_1;
 		ang_1_then += ang_1;
 		ind_j += aux_j;
-
 	}
-
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();
-
  };

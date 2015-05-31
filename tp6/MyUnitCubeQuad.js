@@ -7,12 +7,10 @@
 //MyUnitCubeQuad e uma subclasse de CGFobject
 function MyUnitCubeQuad(scene) {
 	CGFobject.call(this,scene);
-//	this.quad = new Plane(this.scene, 10);
+
 	this.quad = new MyQuad(scene, 0, 1, 0, 1);
+	
 	this.quad.initBuffers();
-
-
-
 };
 
 MyUnitCubeQuad.prototype = Object.create(CGFobject.prototype);

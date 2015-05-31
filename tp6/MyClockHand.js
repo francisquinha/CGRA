@@ -12,8 +12,6 @@ function MyClockHand(scene, width, height) {
 	this.initBuffers();
 };
 
-//var degToRad = Math.PI / 180.0;
-
 MyClockHand.prototype = Object.create(CGFobject.prototype);
 MyClockHand.prototype.constructor=MyClockHand;
 
@@ -24,12 +22,12 @@ MyClockHand.prototype.initBuffers = function () {
                 0, 1, 0	];
 
 	this.indices = [
-            0, 1, 2, 
-        ];
+            0, 1, 2, ];
 
-    this.normals = [ 0, 0, 1,
-                     0, 0, 1,
-                     0, 0, 1 ];
+    this.normals = [ 
+    		0, 0, 1,
+            0, 0, 1,
+            0, 0, 1  ];
 
 	this.primitiveType=this.scene.gl.TRIANGLES;
 	this.initGLBuffers();

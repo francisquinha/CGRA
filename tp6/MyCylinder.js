@@ -21,8 +21,6 @@
 
  MyCylinder.prototype.initBuffers = function() {
 
-	var degToRad = Math.PI / 180.0;
-
 	var ang = 360 * degToRad / this.slices;
 
 	this.vertices = [];
@@ -68,7 +66,7 @@
 
  			var ind_i_j = ind_i + ind_j;
 
-			this.indices.push(ind_i_j); // 0
+			this.indices.push(ind_i_j);		// 0
 			this.indices.push(ind_i_j + 1); // 1
 			this.indices.push(ind_i_j + 2); // 2
 
@@ -105,18 +103,8 @@
 			this.texCoords.push(1 - (i + 1) / this.slices, (j + 1) / this.stacks);
 
 		}			
-
 		ind_j += aux_j;
-
 	}
-
-/*
-	console.log(this.vertices.length/3);
-	console.log(this.texCoords.length/2);
-*/	
-	
-		
  	this.primitiveType = this.scene.gl.TRIANGLES;
  	this.initGLBuffers();
-
  };
